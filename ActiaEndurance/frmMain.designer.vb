@@ -219,6 +219,19 @@ Partial Class frmMain
         Me.ind_v104_max = New System.Windows.Forms.PictureBox()
         Me.btn_v104_ext = New System.Windows.Forms.Button()
         Me.ind_v104_min = New System.Windows.Forms.PictureBox()
+        Me.GroupBox32 = New System.Windows.Forms.GroupBox()
+        Me.Label104 = New System.Windows.Forms.Label()
+        Me.Label103 = New System.Windows.Forms.Label()
+        Me.Label102 = New System.Windows.Forms.Label()
+        Me.Label101 = New System.Windows.Forms.Label()
+        Me.Label100 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.ind_fdut6 = New System.Windows.Forms.PictureBox()
+        Me.ind_fdut5 = New System.Windows.Forms.PictureBox()
+        Me.ind_fdut4 = New System.Windows.Forms.PictureBox()
+        Me.ind_fdut3 = New System.Windows.Forms.PictureBox()
+        Me.ind_fdut2 = New System.Windows.Forms.PictureBox()
+        Me.ind_fdut1 = New System.Windows.Forms.PictureBox()
         Me.DatalogSQLTab = New System.Windows.Forms.TabPage()
         Me.btn_clear_search = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -392,6 +405,13 @@ Partial Class frmMain
         Me.GroupBox17.SuspendLayout()
         CType(Me.ind_v104_max, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ind_v104_min, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox32.SuspendLayout()
+        CType(Me.ind_fdut6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ind_fdut5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ind_fdut4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ind_fdut3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ind_fdut2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ind_fdut1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DatalogSQLTab.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SettingTab.SuspendLayout()
@@ -745,7 +765,7 @@ Partial Class frmMain
         Me.MachineLog.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MachineLog.Location = New System.Drawing.Point(7, 28)
         Me.MachineLog.Name = "MachineLog"
-        Me.MachineLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal
+        Me.MachineLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.MachineLog.Size = New System.Drawing.Size(237, 218)
         Me.MachineLog.TabIndex = 4
         Me.MachineLog.Text = ""
@@ -1667,6 +1687,7 @@ Partial Class frmMain
         Me.Manual.Controls.Add(Me.gb_meas1)
         Me.Manual.Controls.Add(Me.gb_meas2)
         Me.Manual.Controls.Add(Me.GroupBox23)
+        Me.Manual.Controls.Add(Me.GroupBox32)
         Me.Manual.Location = New System.Drawing.Point(4, 30)
         Me.Manual.Name = "Manual"
         Me.Manual.Size = New System.Drawing.Size(974, 566)
@@ -2170,7 +2191,7 @@ Partial Class frmMain
         Me.btn_v101_ret.Name = "btn_v101_ret"
         Me.btn_v101_ret.Size = New System.Drawing.Size(110, 35)
         Me.btn_v101_ret.TabIndex = 108
-        Me.btn_v101_ret.Text = "RETURN"
+        Me.btn_v101_ret.Text = "RETRACT"
         Me.btn_v101_ret.UseVisualStyleBackColor = True
         '
         'ind_v101_max
@@ -2190,7 +2211,7 @@ Partial Class frmMain
         Me.btn_v101_ext.Name = "btn_v101_ext"
         Me.btn_v101_ext.Size = New System.Drawing.Size(110, 35)
         Me.btn_v101_ext.TabIndex = 109
-        Me.btn_v101_ext.Text = "EXTRACT"
+        Me.btn_v101_ext.Text = "EXTRUDE"
         Me.btn_v101_ext.UseVisualStyleBackColor = True
         '
         'ind_v101_min
@@ -2224,7 +2245,7 @@ Partial Class frmMain
         Me.btn_v106_ret.Name = "btn_v106_ret"
         Me.btn_v106_ret.Size = New System.Drawing.Size(110, 35)
         Me.btn_v106_ret.TabIndex = 108
-        Me.btn_v106_ret.Text = "RETURN"
+        Me.btn_v106_ret.Text = "RETRACT"
         Me.btn_v106_ret.UseVisualStyleBackColor = True
         '
         'ind_v106_max
@@ -2244,7 +2265,7 @@ Partial Class frmMain
         Me.btn_v106_ext.Name = "btn_v106_ext"
         Me.btn_v106_ext.Size = New System.Drawing.Size(110, 35)
         Me.btn_v106_ext.TabIndex = 109
-        Me.btn_v106_ext.Text = "EXTRACT"
+        Me.btn_v106_ext.Text = "EXTRUDE"
         Me.btn_v106_ext.UseVisualStyleBackColor = True
         '
         'ind_v106_min
@@ -2278,7 +2299,7 @@ Partial Class frmMain
         Me.btn_v102_ret.Name = "btn_v102_ret"
         Me.btn_v102_ret.Size = New System.Drawing.Size(110, 35)
         Me.btn_v102_ret.TabIndex = 108
-        Me.btn_v102_ret.Text = "RETURN"
+        Me.btn_v102_ret.Text = "RETRACT"
         Me.btn_v102_ret.UseVisualStyleBackColor = True
         '
         'ind_v102_max
@@ -2298,7 +2319,7 @@ Partial Class frmMain
         Me.btn_v102_ext.Name = "btn_v102_ext"
         Me.btn_v102_ext.Size = New System.Drawing.Size(110, 35)
         Me.btn_v102_ext.TabIndex = 109
-        Me.btn_v102_ext.Text = "EXTRACT"
+        Me.btn_v102_ext.Text = "EXTRUDE"
         Me.btn_v102_ext.UseVisualStyleBackColor = True
         '
         'ind_v102_min
@@ -2332,7 +2353,7 @@ Partial Class frmMain
         Me.btn_v105_ret.Name = "btn_v105_ret"
         Me.btn_v105_ret.Size = New System.Drawing.Size(110, 35)
         Me.btn_v105_ret.TabIndex = 108
-        Me.btn_v105_ret.Text = "RETURN"
+        Me.btn_v105_ret.Text = "RETRACT"
         Me.btn_v105_ret.UseVisualStyleBackColor = True
         '
         'ind_v105_max
@@ -2352,7 +2373,7 @@ Partial Class frmMain
         Me.btn_v105_ext.Name = "btn_v105_ext"
         Me.btn_v105_ext.Size = New System.Drawing.Size(110, 35)
         Me.btn_v105_ext.TabIndex = 109
-        Me.btn_v105_ext.Text = "EXTRACT"
+        Me.btn_v105_ext.Text = "EXTRUDE"
         Me.btn_v105_ext.UseVisualStyleBackColor = True
         '
         'ind_v105_min
@@ -2386,7 +2407,7 @@ Partial Class frmMain
         Me.btn_v103_ret.Name = "btn_v103_ret"
         Me.btn_v103_ret.Size = New System.Drawing.Size(110, 35)
         Me.btn_v103_ret.TabIndex = 108
-        Me.btn_v103_ret.Text = "RETURN"
+        Me.btn_v103_ret.Text = "RETRACT"
         Me.btn_v103_ret.UseVisualStyleBackColor = True
         '
         'ind_v103_max
@@ -2406,7 +2427,7 @@ Partial Class frmMain
         Me.btn_v103_ext.Name = "btn_v103_ext"
         Me.btn_v103_ext.Size = New System.Drawing.Size(110, 35)
         Me.btn_v103_ext.TabIndex = 109
-        Me.btn_v103_ext.Text = "EXTRACT"
+        Me.btn_v103_ext.Text = "EXTRUDE"
         Me.btn_v103_ext.UseVisualStyleBackColor = True
         '
         'ind_v103_min
@@ -2440,7 +2461,7 @@ Partial Class frmMain
         Me.btn_v104_ret.Name = "btn_v104_ret"
         Me.btn_v104_ret.Size = New System.Drawing.Size(110, 35)
         Me.btn_v104_ret.TabIndex = 108
-        Me.btn_v104_ret.Text = "RETURN"
+        Me.btn_v104_ret.Text = "RETRACT"
         Me.btn_v104_ret.UseVisualStyleBackColor = True
         '
         'ind_v104_max
@@ -2460,7 +2481,7 @@ Partial Class frmMain
         Me.btn_v104_ext.Name = "btn_v104_ext"
         Me.btn_v104_ext.Size = New System.Drawing.Size(110, 35)
         Me.btn_v104_ext.TabIndex = 109
-        Me.btn_v104_ext.Text = "EXTRACT"
+        Me.btn_v104_ext.Text = "EXTRUDE"
         Me.btn_v104_ext.UseVisualStyleBackColor = True
         '
         'ind_v104_min
@@ -2473,6 +2494,154 @@ Partial Class frmMain
         Me.ind_v104_min.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.ind_v104_min.TabIndex = 110
         Me.ind_v104_min.TabStop = False
+        '
+        'GroupBox32
+        '
+        Me.GroupBox32.Controls.Add(Me.Label104)
+        Me.GroupBox32.Controls.Add(Me.Label103)
+        Me.GroupBox32.Controls.Add(Me.Label102)
+        Me.GroupBox32.Controls.Add(Me.Label101)
+        Me.GroupBox32.Controls.Add(Me.Label100)
+        Me.GroupBox32.Controls.Add(Me.Label64)
+        Me.GroupBox32.Controls.Add(Me.ind_fdut6)
+        Me.GroupBox32.Controls.Add(Me.ind_fdut5)
+        Me.GroupBox32.Controls.Add(Me.ind_fdut4)
+        Me.GroupBox32.Controls.Add(Me.ind_fdut3)
+        Me.GroupBox32.Controls.Add(Me.ind_fdut2)
+        Me.GroupBox32.Controls.Add(Me.ind_fdut1)
+        Me.GroupBox32.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox32.Location = New System.Drawing.Point(14, 453)
+        Me.GroupBox32.Name = "GroupBox32"
+        Me.GroupBox32.Size = New System.Drawing.Size(436, 100)
+        Me.GroupBox32.TabIndex = 133
+        Me.GroupBox32.TabStop = False
+        Me.GroupBox32.Text = "PRESENCE SENSOR"
+        '
+        'Label104
+        '
+        Me.Label104.AutoSize = True
+        Me.Label104.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label104.Location = New System.Drawing.Point(79, 37)
+        Me.Label104.Name = "Label104"
+        Me.Label104.Size = New System.Drawing.Size(61, 21)
+        Me.Label104.TabIndex = 123
+        Me.Label104.Text = "FDUT 2"
+        '
+        'Label103
+        '
+        Me.Label103.AutoSize = True
+        Me.Label103.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label103.Location = New System.Drawing.Point(153, 37)
+        Me.Label103.Name = "Label103"
+        Me.Label103.Size = New System.Drawing.Size(61, 21)
+        Me.Label103.TabIndex = 122
+        Me.Label103.Text = "FDUT 3"
+        '
+        'Label102
+        '
+        Me.Label102.AutoSize = True
+        Me.Label102.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label102.Location = New System.Drawing.Point(225, 37)
+        Me.Label102.Name = "Label102"
+        Me.Label102.Size = New System.Drawing.Size(61, 21)
+        Me.Label102.TabIndex = 121
+        Me.Label102.Text = "FDUT 4"
+        '
+        'Label101
+        '
+        Me.Label101.AutoSize = True
+        Me.Label101.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label101.Location = New System.Drawing.Point(298, 37)
+        Me.Label101.Name = "Label101"
+        Me.Label101.Size = New System.Drawing.Size(61, 21)
+        Me.Label101.TabIndex = 120
+        Me.Label101.Text = "FDUT 5"
+        '
+        'Label100
+        '
+        Me.Label100.AutoSize = True
+        Me.Label100.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label100.Location = New System.Drawing.Point(371, 37)
+        Me.Label100.Name = "Label100"
+        Me.Label100.Size = New System.Drawing.Size(61, 21)
+        Me.Label100.TabIndex = 119
+        Me.Label100.Text = "FDUT 6"
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label64.Location = New System.Drawing.Point(6, 37)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(61, 21)
+        Me.Label64.TabIndex = 118
+        Me.Label64.Text = "FDUT 1"
+        '
+        'ind_fdut6
+        '
+        Me.ind_fdut6.BackColor = System.Drawing.Color.Red
+        Me.ind_fdut6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ind_fdut6.Location = New System.Drawing.Point(389, 61)
+        Me.ind_fdut6.Name = "ind_fdut6"
+        Me.ind_fdut6.Size = New System.Drawing.Size(25, 25)
+        Me.ind_fdut6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ind_fdut6.TabIndex = 117
+        Me.ind_fdut6.TabStop = False
+        '
+        'ind_fdut5
+        '
+        Me.ind_fdut5.BackColor = System.Drawing.Color.Red
+        Me.ind_fdut5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ind_fdut5.Location = New System.Drawing.Point(316, 61)
+        Me.ind_fdut5.Name = "ind_fdut5"
+        Me.ind_fdut5.Size = New System.Drawing.Size(25, 25)
+        Me.ind_fdut5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ind_fdut5.TabIndex = 116
+        Me.ind_fdut5.TabStop = False
+        '
+        'ind_fdut4
+        '
+        Me.ind_fdut4.BackColor = System.Drawing.Color.Red
+        Me.ind_fdut4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ind_fdut4.Location = New System.Drawing.Point(243, 61)
+        Me.ind_fdut4.Name = "ind_fdut4"
+        Me.ind_fdut4.Size = New System.Drawing.Size(25, 25)
+        Me.ind_fdut4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ind_fdut4.TabIndex = 115
+        Me.ind_fdut4.TabStop = False
+        '
+        'ind_fdut3
+        '
+        Me.ind_fdut3.BackColor = System.Drawing.Color.Red
+        Me.ind_fdut3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ind_fdut3.Location = New System.Drawing.Point(170, 61)
+        Me.ind_fdut3.Name = "ind_fdut3"
+        Me.ind_fdut3.Size = New System.Drawing.Size(25, 25)
+        Me.ind_fdut3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ind_fdut3.TabIndex = 114
+        Me.ind_fdut3.TabStop = False
+        '
+        'ind_fdut2
+        '
+        Me.ind_fdut2.BackColor = System.Drawing.Color.Red
+        Me.ind_fdut2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ind_fdut2.Location = New System.Drawing.Point(97, 61)
+        Me.ind_fdut2.Name = "ind_fdut2"
+        Me.ind_fdut2.Size = New System.Drawing.Size(25, 25)
+        Me.ind_fdut2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ind_fdut2.TabIndex = 113
+        Me.ind_fdut2.TabStop = False
+        '
+        'ind_fdut1
+        '
+        Me.ind_fdut1.BackColor = System.Drawing.Color.Red
+        Me.ind_fdut1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ind_fdut1.Location = New System.Drawing.Point(24, 61)
+        Me.ind_fdut1.Name = "ind_fdut1"
+        Me.ind_fdut1.Size = New System.Drawing.Size(25, 25)
+        Me.ind_fdut1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ind_fdut1.TabIndex = 112
+        Me.ind_fdut1.TabStop = False
         '
         'DatalogSQLTab
         '
@@ -3756,6 +3925,14 @@ Partial Class frmMain
         Me.GroupBox17.ResumeLayout(False)
         CType(Me.ind_v104_max, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ind_v104_min, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox32.ResumeLayout(False)
+        Me.GroupBox32.PerformLayout()
+        CType(Me.ind_fdut6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ind_fdut5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ind_fdut4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ind_fdut3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ind_fdut2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ind_fdut1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DatalogSQLTab.ResumeLayout(False)
         Me.DatalogSQLTab.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4113,4 +4290,17 @@ Partial Class frmMain
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
     Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox32 As GroupBox
+    Friend WithEvents Label104 As Label
+    Friend WithEvents Label103 As Label
+    Friend WithEvents Label102 As Label
+    Friend WithEvents Label101 As Label
+    Friend WithEvents Label100 As Label
+    Friend WithEvents Label64 As Label
+    Friend WithEvents ind_fdut6 As PictureBox
+    Friend WithEvents ind_fdut5 As PictureBox
+    Friend WithEvents ind_fdut4 As PictureBox
+    Friend WithEvents ind_fdut3 As PictureBox
+    Friend WithEvents ind_fdut2 As PictureBox
+    Friend WithEvents ind_fdut1 As PictureBox
 End Class

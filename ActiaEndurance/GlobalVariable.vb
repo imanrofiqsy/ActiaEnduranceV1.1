@@ -3,6 +3,7 @@
     Public Type As ProductType
     Public UseCavity As Cavity
     Public EnCavity As Cavity
+    Public FDUT As Cavity
     Public Filter As FilterType
     Public Alarm As MachineAlarm
     Public Manual As ManualVar
@@ -104,7 +105,7 @@
 
     Public Structure ManualVar
         'Move Cylinder
-        Dim ExtractCY As Boolean
+        Dim ExtrudeCY As Boolean
         Dim ReturnCY As Boolean
 
         'Cylinde Sensor
@@ -129,5 +130,4 @@
         Dim trigCurr As Integer
 
     End Structure
-
 End Module

@@ -33,11 +33,13 @@ Public Class frmMain
             secureLvlMan.Text = "Your Security Level Is Too Low To See This Tab!!!"
             secureLvlMan.Location = New Point(3, 0)
             secureLvlMan.Size = New Size(955, 549)
+            secureLvlMan.BringToFront()
 
             secureLvlSet.Visible = True
             secureLvlSet.Text = "Your Security Level Is Too Low To See This Tab!!!"
             secureLvlSet.Location = New Point(3, 0)
             secureLvlSet.Size = New Size(955, 549)
+            secureLvlSet.BringToFront()
 
             'Quality
         ElseIf UserLevel = 4 Then
@@ -46,11 +48,13 @@ Public Class frmMain
             secureLvlMan.Text = "Your Security Level Is Too Low To See This Tab!!!"
             secureLvlMan.Location = New Point(3, 0)
             secureLvlMan.Size = New Size(955, 549)
+            secureLvlMan.BringToFront()
 
             secureLvlSet.Visible = True
             secureLvlSet.Text = "Your Security Level Is Too Low To See This Tab!!!"
             secureLvlSet.Location = New Point(3, 0)
             secureLvlSet.Size = New Size(955, 549)
+            secureLvlSet.BringToFront()
         End If
     End Sub
 
@@ -59,6 +63,7 @@ Public Class frmMain
                    MachineLog.AppendText(msg)
                    MachineLog.AppendText(Environment.NewLine)
                    MachineLog.AppendText(Environment.NewLine)
+                   MachineLog.ScrollToCaret()
                End Sub)
     End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -200,10 +205,10 @@ Public Class frmMain
                     'Manual
                     'Move CY101
                     With CY101
-                        If .ExtractCY Then
-                            'Extract
+                        If .ExtrudeCY Then
+                            'Extrude
                             Modbus.WriteInteger(1101, 1)
-                            .ExtractCY = False
+                            .ExtrudeCY = False
                         ElseIf .ReturnCY Then
                             'Retract
                             Modbus.WriteInteger(1101, 2)
@@ -211,10 +216,10 @@ Public Class frmMain
                         End If
                     End With
                     With CY102
-                        If .ExtractCY Then
-                            'Extract
+                        If .ExtrudeCY Then
+                            'Extrude
                             Modbus.WriteInteger(1102, 1)
-                            .ExtractCY = False
+                            .ExtrudeCY = False
                         ElseIf .ReturnCY Then
                             'Retract
                             Modbus.WriteInteger(1102, 2)
@@ -222,10 +227,10 @@ Public Class frmMain
                         End If
                     End With
                     With CY103
-                        If .ExtractCY Then
-                            'Extract
+                        If .ExtrudeCY Then
+                            'Extrude
                             Modbus.WriteInteger(1103, 1)
-                            .ExtractCY = False
+                            .ExtrudeCY = False
                         ElseIf .ReturnCY Then
                             'Retract
                             Modbus.WriteInteger(1103, 2)
@@ -233,10 +238,10 @@ Public Class frmMain
                         End If
                     End With
                     With CY104
-                        If .ExtractCY Then
-                            'Extract
+                        If .ExtrudeCY Then
+                            'Extrude
                             Modbus.WriteInteger(1104, 1)
-                            .ExtractCY = False
+                            .ExtrudeCY = False
                         ElseIf .ReturnCY Then
                             'Retract
                             Modbus.WriteInteger(1104, 2)
@@ -244,10 +249,10 @@ Public Class frmMain
                         End If
                     End With
                     With CY105
-                        If .ExtractCY Then
-                            'Extract
+                        If .ExtrudeCY Then
+                            'Extrude
                             Modbus.WriteInteger(1105, 1)
-                            .ExtractCY = False
+                            .ExtrudeCY = False
                         ElseIf .ReturnCY Then
                             'Retract
                             Modbus.WriteInteger(1105, 2)
@@ -255,10 +260,10 @@ Public Class frmMain
                         End If
                     End With
                     With CY106
-                        If .ExtractCY Then
-                            'Extract
+                        If .ExtrudeCY Then
+                            'Extrude
                             Modbus.WriteInteger(1106, 1)
-                            .ExtractCY = False
+                            .ExtrudeCY = False
                         ElseIf .ReturnCY Then
                             'Retract
                             Modbus.WriteInteger(1106, 2)
@@ -340,6 +345,42 @@ Public Class frmMain
                         End If
                     End With
 
+                    'Sensor FDUT
+                    Dim FDUTAddr As Integer
+                    With FDUT
+                        FDUTAddr = Modbus.ReadInteger(1300)
+
+                        If Modbus.ReadBit(FDUTAddr, 0) = 1 Then
+                            .Cav1 = True
+                        Else
+                            .Cav1 = False
+                        End If
+                        If Modbus.ReadBit(FDUTAddr, 1) = 1 Then
+                            .Cav2 = True
+                        Else
+                            .Cav2 = False
+                        End If
+                        If Modbus.ReadBit(FDUTAddr, 2) = 1 Then
+                            .Cav3 = True
+                        Else
+                            .Cav3 = False
+                        End If
+                        If Modbus.ReadBit(FDUTAddr, 3) = 1 Then
+                            .Cav4 = True
+                        Else
+                            .Cav4 = False
+                        End If
+                        If Modbus.ReadBit(FDUTAddr, 4) = 1 Then
+                            .Cav5 = True
+                        Else
+                            .Cav5 = False
+                        End If
+                        If Modbus.ReadBit(FDUTAddr, 5) = 1 Then
+                            .Cav6 = True
+                        Else
+                            .Cav6 = False
+                        End If
+                    End With
 
                     'General Communication
                     With GeneralComm
@@ -781,6 +822,39 @@ Public Class frmMain
         Else
             ind_v106_min.BackColor = Color.Red
         End If
+
+        With FDUT
+            If .Cav1 Then
+                ind_fdut1.BackColor = Color.Lime
+            Else
+                ind_fdut1.BackColor = Color.Red
+            End If
+            If .Cav2 Then
+                ind_fdut2.BackColor = Color.Lime
+            Else
+                ind_fdut2.BackColor = Color.Red
+            End If
+            If .Cav3 Then
+                ind_fdut3.BackColor = Color.Lime
+            Else
+                ind_fdut3.BackColor = Color.Red
+            End If
+            If .Cav4 Then
+                ind_fdut4.BackColor = Color.Lime
+            Else
+                ind_fdut4.BackColor = Color.Red
+            End If
+            If .Cav5 Then
+                ind_fdut5.BackColor = Color.Lime
+            Else
+                ind_fdut5.BackColor = Color.Red
+            End If
+            If .Cav6 Then
+                ind_fdut6.BackColor = Color.Lime
+            Else
+                ind_fdut6.BackColor = Color.Red
+            End If
+        End With
     End Sub
     Private Sub btn_save_config_Click(sender As Object, e As EventArgs) Handles btn_save_config.Click
         If txt_cfg_ref.Text = "" Or txt_cfg_date.Text = "" Or txt_cfg_id.Text = "" Or txt_cfg_c_val.Text = "" Or txt_cfg_v_val.Text = "" Or txt_cfg_time_val.Text = "" Or txt_cfg_nbc.Text = "" Or cb_cfg_mode.Text = "" Or cb_cfg_use_v.Text = "" Or cb_cfg_use_c.Text = "" Or cb_cfg_use_time.Text = "" Or cb_cfg_use_cav1.Text = "" Or cb_cfg_use_cav2.Text = "" Or cb_cfg_use_cav3.Text = "" Or cb_cfg_use_cav4.Text = "" Or cb_cfg_use_cav5.Text = "" Or cb_cfg_use_cav6.Text = "" Then
@@ -991,7 +1065,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_v101_ext_Click(sender As Object, e As EventArgs) Handles btn_v101_ext.Click
-        CY101.ExtractCY = True
+        CY101.ExtrudeCY = True
     End Sub
 
     Private Sub btn_v101_ret_Click(sender As Object, e As EventArgs) Handles btn_v101_ret.Click
@@ -999,7 +1073,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_v102_ext_Click(sender As Object, e As EventArgs) Handles btn_v102_ext.Click
-        CY102.ExtractCY = True
+        CY102.ExtrudeCY = True
     End Sub
 
     Private Sub btn_v102_ret_Click(sender As Object, e As EventArgs) Handles btn_v102_ret.Click
@@ -1007,7 +1081,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_v103_ext_Click(sender As Object, e As EventArgs) Handles btn_v103_ext.Click
-        CY103.ExtractCY = True
+        CY103.ExtrudeCY = True
     End Sub
 
     Private Sub btn_v103_ret_Click(sender As Object, e As EventArgs) Handles btn_v103_ret.Click
@@ -1015,7 +1089,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_v104_ext_Click(sender As Object, e As EventArgs) Handles btn_v104_ext.Click
-        CY104.ExtractCY = True
+        CY104.ExtrudeCY = True
     End Sub
 
     Private Sub btn_v104_ret_Click(sender As Object, e As EventArgs) Handles btn_v104_ret.Click
@@ -1023,7 +1097,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_v105_ext_Click(sender As Object, e As EventArgs) Handles btn_v105_ext.Click
-        CY105.ExtractCY = True
+        CY105.ExtrudeCY = True
     End Sub
 
     Private Sub btn_v105_ret_Click(sender As Object, e As EventArgs) Handles btn_v105_ret.Click
@@ -1031,7 +1105,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_v106_ext_Click(sender As Object, e As EventArgs) Handles btn_v106_ext.Click
-        CY106.ExtractCY = True
+        CY106.ExtrudeCY = True
     End Sub
 
     Private Sub btn_v106_ret_Click(sender As Object, e As EventArgs) Handles btn_v106_ret.Click

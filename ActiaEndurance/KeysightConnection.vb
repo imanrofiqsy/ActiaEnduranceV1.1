@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.VisualBasic
 Imports System.Text
 Imports System.Net.Sockets
+Imports System.Threading
 Module KeysightConnection
 
     'Init Variable
@@ -11,6 +12,7 @@ Module KeysightConnection
     Dim tcpListeners As TcpListener
     Dim dataRX(1024) As Byte
     Dim TCPClinetStream As NetworkStream
+    Dim KeyKS As String
     Public KSconnected As Boolean
 
     Public Sub ConnectToKS(ip As String, port As String)
@@ -18,8 +20,14 @@ rePingKS:
         Try
             client = New TcpClient(ip, port)
             WriteToKS("*IDN?")
+            'Thread.Sleep(1000)
+            For i As Integer = 1 To 10
+                Thread.Sleep(100)
+                My.Application.DoEvents()
+            Next
 
-            If client.Connected And Strings.Replace(ReadFromKS(), Environment.NewLine, "") = "Keysight Technologies,DAQ973A,MY59012524,A.03.02-01.00-02.01-00.02-02.00-03-03" Then
+            KeyKS = ReadFromKS()
+            If client.Connected And Strings.Replace(KeyKS, Environment.NewLine, "") = "Keysight Technologies,DAQ973A,MY59012524,A.03.02-01.00-02.01-00.02-02.00-03-03" Then
                 _connected = True
                 KSconnected = True
             Else
