@@ -4,11 +4,16 @@
     Public UseCavity As Cavity
     Public EnCavity As Cavity
     Public FDUT As Cavity
+    Public CurrentVal As Cavity
     Public Filter As FilterType
     Public Alarm As MachineAlarm
     Public Manual As ManualVar
     Public GeneralComm As GeneralCommunication
     Public UserLevel As Integer
+    Public StateNumber As Integer
+    Public measResult As String
+    Public trigPLC As Boolean
+    Public measDone As Boolean
 
     Public Structure MachineConfig
         'Modbus
@@ -86,6 +91,13 @@
         Dim Cav4 As String
         Dim Cav5 As String
         Dim Cav6 As String
+
+        Dim Cur1 As String
+        Dim Cur2 As String
+        Dim Cur3 As String
+        Dim Cur4 As String
+        Dim Cur5 As String
+        Dim Cur6 As String
     End Structure
 
     Public Structure FilterType

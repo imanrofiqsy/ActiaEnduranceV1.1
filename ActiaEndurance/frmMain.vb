@@ -81,8 +81,10 @@ Public Class frmMain
     Private Sub LoadingApp()
         Try
             With Config
-                UserLevel = 3
-                GetUSerLevel()
+                UserLevel = 1
+                Invoke(Sub()
+                           GetUSerLevel()
+                       End Sub)
                 LoadingMSG("Establishing connection to PLC...")
                 With Config
                     .IP = configData("PLC")("IP")
@@ -138,7 +140,7 @@ Public Class frmMain
                 End With
 
                 LoadingMSG("Establishing connection to Database Server...")
-                LoadTable()
+                'LoadTable()
                 Thread.Sleep(500)
 
                 LoadingMSG("Reading CONFIG...")
@@ -393,12 +395,12 @@ Public Class frmMain
                         Modbus.WriteInteger(10007, .FinCurr)
 
                         With EnCavity
-                            Modbus.WriteInteger(10008, .Cav1)
-                            Modbus.WriteInteger(10009, .Cav2)
-                            Modbus.WriteInteger(10010, .Cav3)
-                            Modbus.WriteInteger(10011, .Cav4)
-                            Modbus.WriteInteger(10012, .Cav5)
-                            Modbus.WriteInteger(10013, .Cav6)
+                            Modbus.WriteInteger(10008, CInt(.Cav1))
+                            Modbus.WriteInteger(10009, CInt(.Cav2))
+                            Modbus.WriteInteger(10010, CInt(.Cav3))
+                            Modbus.WriteInteger(10011, CInt(.Cav4))
+                            Modbus.WriteInteger(10012, CInt(.Cav5))
+                            Modbus.WriteInteger(10013, CInt(.Cav6))
                         End With
 
                         'PLC To PC
@@ -438,8 +440,11 @@ Public Class frmMain
 
                     End With
 
-                        'Load Manual Sensor
-                        LoadSensorManual()
+                    'Load Manual Sensor
+                    LoadSensorManual()
+
+                    'Data Aquisition
+                    CavCycMeas()
                 End If
             Catch ex As Exception
                 IsConnected = False
@@ -1219,7 +1224,6 @@ Public Class frmMain
             KSconnected = False
         End Try
     End Sub
-
     Private Sub btn_disconnect_keysight_Click(sender As Object, e As EventArgs) Handles btn_disconnect_keysight.Click
         Try
             DisconnectFromKS()
@@ -1232,5 +1236,113 @@ Public Class frmMain
         Catch ex As Exception
             MessageBox.Show("Error disconnecting from KEYSIGHT: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+    Private Sub CavCycMeas()
+        With CurrentVal
+            Select Case StateNumber
+                Case 0
+                    If trigPLC Then
+                        trigPLC = False
+                        WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
+                        Thread.Sleep(100)
+                        WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
+                        Thread.Sleep(100)
+                        StateNumber = 1
+                    End If
+                Case 1
+                    If EnCavity.Cav1 = "1" Then
+                        CurrMeasCycle("102", "103", "101", "221")
+                        .Cur1 = measResult
+                    Else
+                        .Cur1 = ""
+                    End If
+                    Invoke(Sub()
+                               TextBox1.Text = .Cur1
+                           End Sub)
+                    StateNumber = 2
+                Case 2
+                    If EnCavity.Cav2 = "1" Then
+                        CurrMeasCycle("105", "106", "104", "221")
+                        .Cur2 = measResult
+                    Else
+                        .Cur2 = ""
+                    End If
+                    Invoke(Sub()
+                               TextBox2.Text = .Cur2
+                           End Sub)
+                    StateNumber = 3
+                Case 3
+                    If EnCavity.Cav3 = "1" Then
+                        CurrMeasCycle("108", "109", "107", "221")
+                        .Cur3 = measResult
+                    Else
+                        .Cur3 = ""
+                    End If
+                    Invoke(Sub()
+                               TextBox3.Text = .Cur3
+                           End Sub)
+                    StateNumber = 4
+                Case 4
+                    If EnCavity.Cav4 = "1" Then
+                        CurrMeasCycle("111", "112", "110", "221")
+                        .Cur4 = measResult
+                    Else
+                        .Cur4 = ""
+                    End If
+                    Invoke(Sub()
+                               TextBox4.Text = .Cur4
+                           End Sub)
+                    StateNumber = 5
+                Case 5
+                    If EnCavity.Cav5 = "1" Then
+                        CurrMeasCycle("114", "115", "113", "221")
+                        .Cur5 = measResult
+                    Else
+                        .Cur5 = ""
+                    End If
+                    Invoke(Sub()
+                               TextBox5.Text = .Cur5
+                           End Sub)
+                    StateNumber = 6
+                Case 6
+                    If EnCavity.Cav5 = "1" Then
+                        CurrMeasCycle("117", "118", "116", "221")
+                        .Cur6 = measResult
+                    Else
+                        .Cur6 = ""
+                    End If
+                    Invoke(Sub()
+                               TextBox6.Text = .Cur6
+                           End Sub)
+                    StateNumber = 0
+                    measDone = True
+            End Select
+        End With
+    End Sub
+    Private Sub CurrMeasCycle(CHa As String, CHb As String, CHc As String, CHd As String)
+        WriteToKS("CONF:CURR:DC 1,(@" & CHd & ")")
+        Thread.Sleep(50)
+        WriteToKS("ROUT:CLOSE (@" & CHb & ", " & CHc & ")")
+        Thread.Sleep(50)
+        WriteToKS("ROUT:OPEN (@" & CHa & ")")
+        Thread.Sleep(50)
+        WriteToKS("READ?")
+        For i As Integer = 1 To 5
+            Thread.Sleep(100)
+            My.Application.DoEvents()
+        Next
+        Dim str As String = ReadFromKS()
+        measResult = str.Substring(0, str.IndexOf("E") + 4)
+        measResult = Decimal.Parse(measResult, System.Globalization.NumberStyles.Float)
+        Thread.Sleep(50)
+        WriteToKS("ROUT:CLOSE (@" & CHa & ")")
+        Thread.Sleep(50)
+        WriteToKS("ROUT:OPEN (@" & CHb & ", " & CHc & ")")
+        Thread.Sleep(50)
+
+    End Sub
+
+    Private Sub manualTrig_Click(sender As Object, e As EventArgs) Handles manualTrig.Click
+        trigPLC = True
     End Sub
 End Class

@@ -355,6 +355,7 @@ Partial Class frmMain
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_alarm = New System.Windows.Forms.Label()
         Me.lbl_user = New System.Windows.Forms.Label()
+        Me.manualTrig = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tab.SuspendLayout()
         Me.MainTab.SuspendLayout()
@@ -497,6 +498,7 @@ Partial Class frmMain
         '
         'GroupBox6
         '
+        Me.GroupBox6.Controls.Add(Me.manualTrig)
         Me.GroupBox6.Controls.Add(Me.btn_run)
         Me.GroupBox6.Controls.Add(Me.Label30)
         Me.GroupBox6.Controls.Add(Me.Label31)
@@ -810,7 +812,7 @@ Partial Class frmMain
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(628, 252)
+        Me.GroupBox1.Size = New System.Drawing.Size(675, 252)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Test Result"
@@ -857,30 +859,36 @@ Partial Class frmMain
         '
         'TextBox24
         '
+        Me.TextBox24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox24.Location = New System.Drawing.Point(556, 191)
         Me.TextBox24.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox24.Name = "TextBox24"
         Me.TextBox24.ReadOnly = True
-        Me.TextBox24.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox24.Size = New System.Drawing.Size(80, 25)
         Me.TextBox24.TabIndex = 0
+        Me.TextBox24.WordWrap = False
         '
         'TextBox18
         '
+        Me.TextBox18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox18.Location = New System.Drawing.Point(556, 150)
         Me.TextBox18.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox18.Name = "TextBox18"
         Me.TextBox18.ReadOnly = True
-        Me.TextBox18.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox18.Size = New System.Drawing.Size(80, 25)
         Me.TextBox18.TabIndex = 0
+        Me.TextBox18.WordWrap = False
         '
         'TextBox12
         '
+        Me.TextBox12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox12.Location = New System.Drawing.Point(556, 110)
         Me.TextBox12.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.ReadOnly = True
-        Me.TextBox12.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox12.Size = New System.Drawing.Size(80, 25)
         Me.TextBox12.TabIndex = 0
+        Me.TextBox12.WordWrap = False
         '
         'TextBox36
         '
@@ -895,30 +903,36 @@ Partial Class frmMain
         '
         'TextBox6
         '
+        Me.TextBox6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox6.Location = New System.Drawing.Point(556, 69)
         Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox6.Size = New System.Drawing.Size(80, 25)
         Me.TextBox6.TabIndex = 0
+        Me.TextBox6.WordWrap = False
         '
         'TextBox23
         '
+        Me.TextBox23.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox23.Location = New System.Drawing.Point(465, 191)
         Me.TextBox23.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox23.Name = "TextBox23"
         Me.TextBox23.ReadOnly = True
-        Me.TextBox23.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox23.Size = New System.Drawing.Size(80, 25)
         Me.TextBox23.TabIndex = 0
+        Me.TextBox23.WordWrap = False
         '
         'TextBox17
         '
+        Me.TextBox17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox17.Location = New System.Drawing.Point(465, 150)
         Me.TextBox17.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.ReadOnly = True
-        Me.TextBox17.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox17.Size = New System.Drawing.Size(80, 25)
         Me.TextBox17.TabIndex = 0
+        Me.TextBox17.WordWrap = False
         '
         'TextBox35
         '
@@ -933,39 +947,47 @@ Partial Class frmMain
         '
         'TextBox11
         '
+        Me.TextBox11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox11.Location = New System.Drawing.Point(465, 110)
         Me.TextBox11.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.ReadOnly = True
-        Me.TextBox11.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox11.Size = New System.Drawing.Size(80, 25)
         Me.TextBox11.TabIndex = 0
+        Me.TextBox11.WordWrap = False
         '
         'TextBox5
         '
+        Me.TextBox5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox5.Location = New System.Drawing.Point(465, 69)
         Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.ReadOnly = True
-        Me.TextBox5.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox5.Size = New System.Drawing.Size(80, 25)
         Me.TextBox5.TabIndex = 0
+        Me.TextBox5.WordWrap = False
         '
         'TextBox22
         '
+        Me.TextBox22.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox22.Location = New System.Drawing.Point(377, 191)
         Me.TextBox22.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox22.Name = "TextBox22"
         Me.TextBox22.ReadOnly = True
-        Me.TextBox22.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox22.Size = New System.Drawing.Size(80, 25)
         Me.TextBox22.TabIndex = 0
+        Me.TextBox22.WordWrap = False
         '
         'TextBox16
         '
+        Me.TextBox16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox16.Location = New System.Drawing.Point(377, 150)
         Me.TextBox16.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox16.Name = "TextBox16"
         Me.TextBox16.ReadOnly = True
-        Me.TextBox16.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox16.Size = New System.Drawing.Size(80, 25)
         Me.TextBox16.TabIndex = 0
+        Me.TextBox16.WordWrap = False
         '
         'TextBox34
         '
@@ -980,39 +1002,47 @@ Partial Class frmMain
         '
         'TextBox10
         '
+        Me.TextBox10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox10.Location = New System.Drawing.Point(377, 110)
         Me.TextBox10.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.ReadOnly = True
-        Me.TextBox10.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox10.Size = New System.Drawing.Size(80, 25)
         Me.TextBox10.TabIndex = 0
+        Me.TextBox10.WordWrap = False
         '
         'TextBox4
         '
+        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.Location = New System.Drawing.Point(377, 69)
         Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox4.Size = New System.Drawing.Size(80, 25)
         Me.TextBox4.TabIndex = 0
+        Me.TextBox4.WordWrap = False
         '
         'TextBox21
         '
+        Me.TextBox21.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox21.Location = New System.Drawing.Point(286, 191)
         Me.TextBox21.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox21.Name = "TextBox21"
         Me.TextBox21.ReadOnly = True
-        Me.TextBox21.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox21.Size = New System.Drawing.Size(80, 25)
         Me.TextBox21.TabIndex = 0
+        Me.TextBox21.WordWrap = False
         '
         'TextBox15
         '
+        Me.TextBox15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox15.Location = New System.Drawing.Point(286, 150)
         Me.TextBox15.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox15.Name = "TextBox15"
         Me.TextBox15.ReadOnly = True
-        Me.TextBox15.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox15.Size = New System.Drawing.Size(80, 25)
         Me.TextBox15.TabIndex = 0
+        Me.TextBox15.WordWrap = False
         '
         'TextBox33
         '
@@ -1027,39 +1057,47 @@ Partial Class frmMain
         '
         'TextBox9
         '
+        Me.TextBox9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox9.Location = New System.Drawing.Point(286, 110)
         Me.TextBox9.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.ReadOnly = True
-        Me.TextBox9.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox9.Size = New System.Drawing.Size(80, 25)
         Me.TextBox9.TabIndex = 0
+        Me.TextBox9.WordWrap = False
         '
         'TextBox3
         '
+        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox3.Location = New System.Drawing.Point(286, 69)
         Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox3.Size = New System.Drawing.Size(80, 25)
         Me.TextBox3.TabIndex = 0
+        Me.TextBox3.WordWrap = False
         '
         'TextBox20
         '
+        Me.TextBox20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox20.Location = New System.Drawing.Point(195, 191)
         Me.TextBox20.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox20.Name = "TextBox20"
         Me.TextBox20.ReadOnly = True
-        Me.TextBox20.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox20.Size = New System.Drawing.Size(80, 25)
         Me.TextBox20.TabIndex = 0
+        Me.TextBox20.WordWrap = False
         '
         'TextBox14
         '
+        Me.TextBox14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox14.Location = New System.Drawing.Point(195, 150)
         Me.TextBox14.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.ReadOnly = True
-        Me.TextBox14.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox14.Size = New System.Drawing.Size(80, 25)
         Me.TextBox14.TabIndex = 0
+        Me.TextBox14.WordWrap = False
         '
         'TextBox32
         '
@@ -1074,39 +1112,47 @@ Partial Class frmMain
         '
         'TextBox8
         '
+        Me.TextBox8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox8.Location = New System.Drawing.Point(195, 110)
         Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.ReadOnly = True
-        Me.TextBox8.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox8.Size = New System.Drawing.Size(80, 25)
         Me.TextBox8.TabIndex = 0
+        Me.TextBox8.WordWrap = False
         '
         'TextBox2
         '
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox2.Location = New System.Drawing.Point(195, 69)
         Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox2.Size = New System.Drawing.Size(80, 25)
         Me.TextBox2.TabIndex = 0
+        Me.TextBox2.WordWrap = False
         '
         'TextBox19
         '
+        Me.TextBox19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox19.Location = New System.Drawing.Point(105, 191)
         Me.TextBox19.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox19.Name = "TextBox19"
         Me.TextBox19.ReadOnly = True
-        Me.TextBox19.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox19.Size = New System.Drawing.Size(80, 25)
         Me.TextBox19.TabIndex = 0
+        Me.TextBox19.WordWrap = False
         '
         'TextBox13
         '
+        Me.TextBox13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox13.Location = New System.Drawing.Point(105, 150)
         Me.TextBox13.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox13.Size = New System.Drawing.Size(80, 25)
         Me.TextBox13.TabIndex = 0
+        Me.TextBox13.WordWrap = False
         '
         'TextBox31
         '
@@ -1121,21 +1167,25 @@ Partial Class frmMain
         '
         'TextBox7
         '
+        Me.TextBox7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox7.Location = New System.Drawing.Point(105, 110)
         Me.TextBox7.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox7.Size = New System.Drawing.Size(80, 25)
         Me.TextBox7.TabIndex = 0
+        Me.TextBox7.WordWrap = False
         '
         'TextBox1
         '
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(105, 69)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(60, 29)
+        Me.TextBox1.Size = New System.Drawing.Size(80, 25)
         Me.TextBox1.TabIndex = 0
+        Me.TextBox1.WordWrap = False
         '
         'ConfigTab
         '
@@ -3848,6 +3898,20 @@ Partial Class frmMain
         Me.lbl_user.Size = New System.Drawing.Size(159, 86)
         Me.lbl_user.TabIndex = 38
         Me.lbl_user.Text = "OPE"
+        Me.lbl_user.Visible = False
+        '
+        'manualTrig
+        '
+        Me.manualTrig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.manualTrig.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.manualTrig.Image = CType(resources.GetObject("manualTrig.Image"), System.Drawing.Image)
+        Me.manualTrig.Location = New System.Drawing.Point(36, 201)
+        Me.manualTrig.Name = "manualTrig"
+        Me.manualTrig.Size = New System.Drawing.Size(80, 79)
+        Me.manualTrig.TabIndex = 70
+        Me.manualTrig.Text = "Manual"
+        Me.manualTrig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.manualTrig.UseVisualStyleBackColor = True
         '
         'frmMain
         '
@@ -4303,4 +4367,5 @@ Partial Class frmMain
     Friend WithEvents ind_fdut3 As PictureBox
     Friend WithEvents ind_fdut2 As PictureBox
     Friend WithEvents ind_fdut1 As PictureBox
+    Friend WithEvents manualTrig As Button
 End Class
