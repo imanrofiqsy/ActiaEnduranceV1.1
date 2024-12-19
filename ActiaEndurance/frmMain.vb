@@ -445,6 +445,11 @@ Public Class frmMain
 
                     'Data Aquisition
                     CavCycMeas()
+
+                    'Demo Cylinder
+                    If trigPLC Then
+                        demo_cylinder()
+                    End If
                 End If
             Catch ex As Exception
                 IsConnected = False
@@ -1242,12 +1247,20 @@ Public Class frmMain
             Select Case StateNumber
                 Case 0
                     If trigPLC Then
-                        trigPLC = False
-                        WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
-                        Thread.Sleep(100)
-                        WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
-                        Thread.Sleep(100)
-                        StateNumber = 1
+                        'trigPLC = False
+                        'WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
+                        'Thread.Sleep(100)
+                        'WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
+                        'Thread.Sleep(100)
+                        'Invoke(Sub()
+                        '           TextBox1.Text = ""
+                        '           TextBox2.Text = ""
+                        '           TextBox3.Text = ""
+                        '           TextBox4.Text = ""
+                        '           TextBox5.Text = ""
+                        '           TextBox6.Text = ""
+                        '       End Sub)
+                        'StateNumber = 1
                     End If
                 Case 1
                     If EnCavity.Cav1 = "1" Then
@@ -1344,5 +1357,27 @@ Public Class frmMain
 
     Private Sub manualTrig_Click(sender As Object, e As EventArgs) Handles manualTrig.Click
         trigPLC = True
+    End Sub
+    Private Sub demo_cylinder()
+        Dim cy_list(12)
+        cy_list(0) = 1101
+        cy_list(1) = 1102
+        cy_list(2) = 1103
+        cy_list(3) = 1104
+        cy_list(4) = 1105
+        cy_list(5) = 1106
+
+        For i As Integer = 0 To 5
+            Modbus.WriteInteger(cy_list(i), 2)
+            Modbus.WriteInteger(cy_list(i + 1), 1)
+            Thread.Sleep(300)
+        Next
+
+        For j As Integer = 0 To 5
+            Modbus.WriteInteger(cy_list(j), 1)
+            Modbus.WriteInteger(cy_list(j + 1), 2)
+            Thread.Sleep(300)
+        Next
+        trigPLC = False
     End Sub
 End Class
