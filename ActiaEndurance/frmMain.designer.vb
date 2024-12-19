@@ -29,6 +29,7 @@ Partial Class frmMain
         Me.GroupBox24 = New System.Windows.Forms.GroupBox()
         Me.opIns = New System.Windows.Forms.RichTextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.manualTrig = New System.Windows.Forms.Button()
         Me.btn_run = New System.Windows.Forms.Button()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
@@ -355,7 +356,6 @@ Partial Class frmMain
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_alarm = New System.Windows.Forms.Label()
         Me.lbl_user = New System.Windows.Forms.Label()
-        Me.manualTrig = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tab.SuspendLayout()
         Me.MainTab.SuspendLayout()
@@ -512,6 +512,19 @@ Partial Class frmMain
         Me.GroupBox6.TabIndex = 7
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Product Information"
+        '
+        'manualTrig
+        '
+        Me.manualTrig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.manualTrig.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.manualTrig.Image = CType(resources.GetObject("manualTrig.Image"), System.Drawing.Image)
+        Me.manualTrig.Location = New System.Drawing.Point(36, 201)
+        Me.manualTrig.Name = "manualTrig"
+        Me.manualTrig.Size = New System.Drawing.Size(80, 79)
+        Me.manualTrig.TabIndex = 70
+        Me.manualTrig.Text = "Manual"
+        Me.manualTrig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.manualTrig.UseVisualStyleBackColor = True
         '
         'btn_run
         '
@@ -3899,19 +3912,6 @@ Partial Class frmMain
         Me.lbl_user.TabIndex = 38
         Me.lbl_user.Text = "OPE"
         Me.lbl_user.Visible = False
-        '
-        'manualTrig
-        '
-        Me.manualTrig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.manualTrig.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.manualTrig.Image = CType(resources.GetObject("manualTrig.Image"), System.Drawing.Image)
-        Me.manualTrig.Location = New System.Drawing.Point(36, 201)
-        Me.manualTrig.Name = "manualTrig"
-        Me.manualTrig.Size = New System.Drawing.Size(80, 79)
-        Me.manualTrig.TabIndex = 70
-        Me.manualTrig.Text = "Manual"
-        Me.manualTrig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.manualTrig.UseVisualStyleBackColor = True
         '
         'frmMain
         '

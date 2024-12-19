@@ -394,6 +394,9 @@ Public Class frmMain
                         Modbus.WriteInteger(10005, .FinVol)
                         Modbus.WriteInteger(10007, .FinCurr)
 
+                        .trigVol = Modbus.ReadInteger(10004)
+                        .trigCurr = Modbus.ReadInteger(10006)
+
                         With EnCavity
                             Modbus.WriteInteger(10008, CInt(.Cav1))
                             Modbus.WriteInteger(10009, CInt(.Cav2))
@@ -444,15 +447,17 @@ Public Class frmMain
                     LoadSensorManual()
 
                     'Data Aquisition
-                    CavCycMeas()
+                    'CavCycMeas()
 
                     'Demo Cylinder
-                    If trigPLC Then
-                        demo_cylinder()
+                    If GeneralComm.trigCurr = 1 Then
+                        demo_measure()
                     End If
                 End If
             Catch ex As Exception
-                IsConnected = False
+                If ex.Message <> "Input string was not in a correct format." Then
+                    IsConnected = False
+                End If
             End Try
 
             Thread.Sleep(40)
@@ -994,10 +999,6 @@ Public Class frmMain
     Private Sub txt_main_date_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_main_date.MouseDoubleClick
         txt_main_date.Text = Date.Now.ToShortDateString
     End Sub
-
-    Private Sub btn_start_Click(sender As Object, e As EventArgs)
-
-    End Sub
     Private Sub current_mode_ac_Click(sender As Object, e As EventArgs) Handles current_mode_ac.Click
         current_mode_dc.Checked = False
         Filter.CurrType = "AC"
@@ -1242,25 +1243,24 @@ Public Class frmMain
             MessageBox.Show("Error disconnecting from KEYSIGHT: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub CavCycMeas()
+    Private Sub demo_measure()
         With CurrentVal
             Select Case StateNumber
                 Case 0
-                    If trigPLC Then
-                        'trigPLC = False
-                        'WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
-                        'Thread.Sleep(100)
-                        'WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
-                        'Thread.Sleep(100)
-                        'Invoke(Sub()
-                        '           TextBox1.Text = ""
-                        '           TextBox2.Text = ""
-                        '           TextBox3.Text = ""
-                        '           TextBox4.Text = ""
-                        '           TextBox5.Text = ""
-                        '           TextBox6.Text = ""
-                        '       End Sub)
-                        'StateNumber = 1
+                    If GeneralComm.trigCurr = 1 Then
+                        WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
+                        Thread.Sleep(100)
+                        WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
+                        Thread.Sleep(100)
+                        Invoke(Sub()
+                                   TextBox1.Text = ""
+                                   TextBox2.Text = ""
+                                   TextBox3.Text = ""
+                                   TextBox4.Text = ""
+                                   TextBox5.Text = ""
+                                   TextBox6.Text = ""
+                               End Sub)
+                        StateNumber = 1
                     End If
                 Case 1
                     If EnCavity.Cav1 = "1" Then
@@ -1328,7 +1328,7 @@ Public Class frmMain
                                TextBox6.Text = .Cur6
                            End Sub)
                     StateNumber = 0
-                    measDone = True
+                    GeneralComm.FinCurr = 1
             End Select
         End With
     End Sub
@@ -1346,7 +1346,7 @@ Public Class frmMain
         Next
         Dim str As String = ReadFromKS()
         measResult = str.Substring(0, str.IndexOf("E") + 4)
-        measResult = Decimal.Parse(measResult, System.Globalization.NumberStyles.Float)
+        'measResult = Decimal.Parse(measResult, System.Globalization.NumberStyles.Float).ToString
         Thread.Sleep(50)
         WriteToKS("ROUT:CLOSE (@" & CHa & ")")
         Thread.Sleep(50)
@@ -1355,29 +1355,11 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub manualTrig_Click(sender As Object, e As EventArgs) Handles manualTrig.Click
-        trigPLC = True
+    Private Sub btn_run_MouseDown(sender As Object, e As MouseEventArgs) Handles btn_run.MouseDown
+        GeneralComm.rdyStart = 1
     End Sub
-    Private Sub demo_cylinder()
-        Dim cy_list(12)
-        cy_list(0) = 1101
-        cy_list(1) = 1102
-        cy_list(2) = 1103
-        cy_list(3) = 1104
-        cy_list(4) = 1105
-        cy_list(5) = 1106
 
-        For i As Integer = 0 To 5
-            Modbus.WriteInteger(cy_list(i), 2)
-            Modbus.WriteInteger(cy_list(i + 1), 1)
-            Thread.Sleep(300)
-        Next
-
-        For j As Integer = 0 To 5
-            Modbus.WriteInteger(cy_list(j), 1)
-            Modbus.WriteInteger(cy_list(j + 1), 2)
-            Thread.Sleep(300)
-        Next
-        trigPLC = False
+    Private Sub btn_run_MouseUp(sender As Object, e As MouseEventArgs) Handles btn_run.MouseUp
+        GeneralComm.rdyStart = 0
     End Sub
 End Class
