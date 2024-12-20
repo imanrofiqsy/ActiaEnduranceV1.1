@@ -433,7 +433,7 @@ Partial Class frmMain
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Image = Global.ActiaEndurance.My.Resources.Resources.logo_preview1
         Me.PictureBox1.Location = New System.Drawing.Point(722, 13)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"

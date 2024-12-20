@@ -473,136 +473,133 @@ Public Class frmMain
             With Alarm
                 If IsConnected Then
                     responseNo = 0
-
-                    If KSconnected Then
-
-                        'Minor Defect (Cylinder)
-                        'Extrude
-                        If .V101EXT = 1 Then
-                            .alarmMsg = "ALARM : V101 EXT Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V102EXT = 1 Then
-                            .alarmMsg = "ALARM : V102 EXT Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V103EXT = 1 Then
-                            .alarmMsg = "ALARM : V103 EXT Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V104EXT = 1 Then
-                            .alarmMsg = "ALARM : V104 EXT Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V105EXT = 1 Then
-                            .alarmMsg = "ALARM : V105 EXT Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V106EXT = 1 Then
-                            .alarmMsg = "ALARM : V106 EXT Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-
-                            'Retract
-                        ElseIf .V101RET = 1 Then
-                            .alarmMsg = "ALARM : V101 RET Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V102RET = 1 Then
-                            .alarmMsg = "ALARM : V102 RET Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V103RET = 1 Then
-                            .alarmMsg = "ALARM : V103 RET Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V104RET = 1 Then
-                            .alarmMsg = "ALARM : V104 RET Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V105RET = 1 Then
-                            .alarmMsg = "ALARM : V105 RET Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .V106RET = 1 Then
-                            .alarmMsg = "ALARM : V106 RET Discrepancy"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-
-
-                            'Major Defect
-                        ElseIf .AirFail Then
-                            .alarmMsg = "ALARM : Air failure, please check air supply!"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .EmgPress Then
-                            .alarmMsg = "ALARM : Emergency button pressed!"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .ContactorFail Then
-                            .alarmMsg = "ALARM : Contactor 24V fail, please check!"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-
-                            'Defect Alarm
-                        ElseIf .MeasTO Then
-                            .alarmMsg = "ALARM : Measure timeout"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .NeedInit Then
-                            .alarmMsg = "ALARM : Need to initialize to start machine"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-                        ElseIf .NeedConf Then
-                            .alarmMsg = "ALARM : Need to set product configuration"
-                            txtColor = Color.DarkRed
-                            txtBorder = BorderStyle.FixedSingle
-
-                            'No Alarm
-                        Else
-                            .alarmMsg = ""
-                            txtColor = Color.Transparent
-                            txtBorder = BorderStyle.None
-
-                        End If
-
-                    Else
-                        .alarmMsg = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication"
-
-                        'MainTab
+                    'Minor Defect (Cylinder)
+                    'Extrude
+                    If .V101EXT = 1 Then
+                        .alarmMsg = "ALARM : V101 EXT Discrepancy"
                         txtColor = Color.DarkRed
                         txtBorder = BorderStyle.FixedSingle
-                        ind_keysight.BackColor = Color.Red
+                    ElseIf .V102EXT = 1 Then
+                        .alarmMsg = "ALARM : V102 EXT Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V103EXT = 1 Then
+                        .alarmMsg = "ALARM : V103 EXT Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V104EXT = 1 Then
+                        .alarmMsg = "ALARM : V104 EXT Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V105EXT = 1 Then
+                        .alarmMsg = "ALARM : V105 EXT Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V106EXT = 1 Then
+                        .alarmMsg = "ALARM : V106 EXT Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
 
-                        'SettingTab
-                        Invoke(Sub()
-                                   lbl_keysight_ind.Text = "Disconnected"
-                                   lbl_keysight_ind.BackColor = Color.DarkRed
-                               End Sub)
-                        If txt_alarm.Text = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication" And responseKSNo = 0 Then
-                            Dim responseKS As DialogResult = MessageBox.Show("Do you want to reconnect to KEYSIGHT?", "KEYSIGHT COMMUNICATION ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
-                            If responseKS = DialogResult.Yes Then
-                                Try
-                                    ConnectToKS(Config.IPSight, Config.PortSight)
-                                    If KSconnected Then
-                                        'MainTab
-                                        ind_keysight.BackColor = Color.Lime
+                        'Retract
+                    ElseIf .V101RET = 1 Then
+                        .alarmMsg = "ALARM : V101 RET Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V102RET = 1 Then
+                        .alarmMsg = "ALARM : V102 RET Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V103RET = 1 Then
+                        .alarmMsg = "ALARM : V103 RET Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V104RET = 1 Then
+                        .alarmMsg = "ALARM : V104 RET Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V105RET = 1 Then
+                        .alarmMsg = "ALARM : V105 RET Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .V106RET = 1 Then
+                        .alarmMsg = "ALARM : V106 RET Discrepancy"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
 
-                                        'SettingTab
-                                        Invoke(Sub()
-                                                   lbl_keysight_ind.Text = "Connected"
-                                                   lbl_keysight_ind.BackColor = Color.LimeGreen
-                                               End Sub)
-                                    End If
-                                Catch ex As Exception
-                                End Try
-                            Else
-                                responseKSNo = 1
-                            End If
-                        End If
+
+                        'Major Defect
+                    ElseIf .AirFail Then
+                        .alarmMsg = "ALARM : Air failure, please check air supply!"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .EmgPress Then
+                        .alarmMsg = "ALARM : Emergency button pressed!"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .ContactorFail Then
+                        .alarmMsg = "ALARM : Contactor 24V fail, please check!"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+
+                        'Defect Alarm
+                    ElseIf .MeasTO Then
+                        .alarmMsg = "ALARM : Measure timeout"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .NeedInit Then
+                        .alarmMsg = "ALARM : Need to initialize to start machine"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+                    ElseIf .NeedConf Then
+                        .alarmMsg = "ALARM : Need to set product configuration"
+                        txtColor = Color.DarkRed
+                        txtBorder = BorderStyle.FixedSingle
+
+                        'No Alarm
+                    Else
+                        .alarmMsg = ""
+                        txtColor = Color.Transparent
+                        txtBorder = BorderStyle.None
+
                     End If
 
                 Else
+                    .alarmMsg = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication"
+
+                    'MainTab
+                    txtColor = Color.DarkRed
+                    txtBorder = BorderStyle.FixedSingle
+                    ind_keysight.BackColor = Color.Red
+
+                    'SettingTab
+                    Invoke(Sub()
+                               lbl_keysight_ind.Text = "Disconnected"
+                               lbl_keysight_ind.BackColor = Color.DarkRed
+                           End Sub)
+                    If txt_alarm.Text = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication" And responseKSNo = 0 Then
+                        Dim responseKS As DialogResult = MessageBox.Show("Do you want to reconnect to KEYSIGHT?", "KEYSIGHT COMMUNICATION ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                        If responseKS = DialogResult.Yes Then
+                            Try
+                                ConnectToKS(Config.IPSight, Config.PortSight)
+                                If KSconnected Then
+                                    'MainTab
+                                    ind_keysight.BackColor = Color.Lime
+
+                                    'SettingTab
+                                    Invoke(Sub()
+                                               lbl_keysight_ind.Text = "Connected"
+                                               lbl_keysight_ind.BackColor = Color.LimeGreen
+                                           End Sub)
+                                End If
+                            Catch ex As Exception
+                            End Try
+                        Else
+                            responseKSNo = 1
+                        End If
+                    End If
+                End If
+
+                If Not KSconnected Then
                     .alarmMsg = "ALARM : Modbus Connection Error please check the PLC communication"
 
                     'MainTab
@@ -1243,11 +1240,13 @@ Public Class frmMain
             MessageBox.Show("Error disconnecting from KEYSIGHT: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+    Dim count As Integer = 0
     Private Sub demo_measure()
         With CurrentVal
             Select Case StateNumber
                 Case 0
                     If GeneralComm.trigCurr = 1 Then
+                        GeneralComm.FinCurr = 0
                         WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
                         Thread.Sleep(100)
                         WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
@@ -1329,6 +1328,12 @@ Public Class frmMain
                            End Sub)
                     StateNumber = 0
                     GeneralComm.FinCurr = 1
+                    If count >= countVal - 1 Then
+                        GeneralComm.rdyStart = 0
+                    Else
+                        GeneralComm.rdyStart = 1
+                        count += 1
+                    End If
             End Select
         End With
     End Sub
@@ -1354,9 +1359,11 @@ Public Class frmMain
         Thread.Sleep(50)
 
     End Sub
-
+    Dim countVal As Integer = 0
     Private Sub btn_run_MouseDown(sender As Object, e As MouseEventArgs) Handles btn_run.MouseDown
+        countVal = CInt(txt_cfg_nbc.Text)
         GeneralComm.rdyStart = 1
+        count = 0
     End Sub
 
     Private Sub btn_run_MouseUp(sender As Object, e As MouseEventArgs) Handles btn_run.MouseUp
