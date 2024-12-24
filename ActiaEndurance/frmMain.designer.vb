@@ -36,7 +36,7 @@ Partial Class frmMain
         Me.Label32 = New System.Windows.Forms.Label()
         Me.txt_main_id = New System.Windows.Forms.TextBox()
         Me.txt_main_date = New System.Windows.Forms.TextBox()
-        Me.txt_main_reference = New System.Windows.Forms.TextBox()
+        Me.txt_main_reference_1 = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.TextBox30 = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -140,7 +140,6 @@ Partial Class frmMain
         Me.txt_cfg_id = New System.Windows.Forms.TextBox()
         Me.txt_cfg_nbc = New System.Windows.Forms.TextBox()
         Me.txt_cfg_date = New System.Windows.Forms.TextBox()
-        Me.txt_cfg_ref = New System.Windows.Forms.TextBox()
         Me.Manual = New System.Windows.Forms.TabPage()
         Me.secureLvlMan = New System.Windows.Forms.Label()
         Me.gb_meas1 = New System.Windows.Forms.GroupBox()
@@ -339,23 +338,34 @@ Partial Class frmMain
         Me.TextBox45 = New System.Windows.Forms.TextBox()
         Me.TextBox46 = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txt_coloumn_index = New System.Windows.Forms.TextBox()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.btn_refresh_csv = New System.Windows.Forms.Button()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnData = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnReference = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnOpeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnCavity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnCycCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnCurrMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnVoltCtrl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnVolt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnCurrentCtrl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnCurrent = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnTimeCtrl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnTimeCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnFinalResult = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_alarm = New System.Windows.Forms.Label()
         Me.lbl_user = New System.Windows.Forms.Label()
+        Me.TextBox25 = New System.Windows.Forms.TextBox()
+        Me.TextBox26 = New System.Windows.Forms.TextBox()
+        Me.TextBox39 = New System.Windows.Forms.TextBox()
+        Me.cb_cfg_ref_1 = New System.Windows.Forms.ComboBox()
+        Me.cb_cfg_ref_2 = New System.Windows.Forms.ComboBox()
+        Me.cb_cfg_ref_3 = New System.Windows.Forms.ComboBox()
+        Me.txt_main_reference_3 = New System.Windows.Forms.TextBox()
+        Me.txt_main_reference_2 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tab.SuspendLayout()
         Me.MainTab.SuspendLayout()
@@ -491,6 +501,7 @@ Partial Class frmMain
         Me.opIns.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.opIns.Location = New System.Drawing.Point(7, 28)
         Me.opIns.Name = "opIns"
+        Me.opIns.ReadOnly = True
         Me.opIns.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal
         Me.opIns.Size = New System.Drawing.Size(237, 252)
         Me.opIns.TabIndex = 4
@@ -505,7 +516,9 @@ Partial Class frmMain
         Me.GroupBox6.Controls.Add(Me.Label32)
         Me.GroupBox6.Controls.Add(Me.txt_main_id)
         Me.GroupBox6.Controls.Add(Me.txt_main_date)
-        Me.GroupBox6.Controls.Add(Me.txt_main_reference)
+        Me.GroupBox6.Controls.Add(Me.txt_main_reference_2)
+        Me.GroupBox6.Controls.Add(Me.txt_main_reference_3)
+        Me.GroupBox6.Controls.Add(Me.txt_main_reference_1)
         Me.GroupBox6.Location = New System.Drawing.Point(263, 8)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(346, 292)
@@ -574,6 +587,7 @@ Partial Class frmMain
         Me.txt_main_id.Location = New System.Drawing.Point(144, 110)
         Me.txt_main_id.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_main_id.Name = "txt_main_id"
+        Me.txt_main_id.ReadOnly = True
         Me.txt_main_id.Size = New System.Drawing.Size(168, 29)
         Me.txt_main_id.TabIndex = 2
         '
@@ -582,16 +596,18 @@ Partial Class frmMain
         Me.txt_main_date.Location = New System.Drawing.Point(144, 73)
         Me.txt_main_date.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_main_date.Name = "txt_main_date"
+        Me.txt_main_date.ReadOnly = True
         Me.txt_main_date.Size = New System.Drawing.Size(168, 29)
         Me.txt_main_date.TabIndex = 3
         '
-        'txt_main_reference
+        'txt_main_reference_1
         '
-        Me.txt_main_reference.Location = New System.Drawing.Point(144, 36)
-        Me.txt_main_reference.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_main_reference.Name = "txt_main_reference"
-        Me.txt_main_reference.Size = New System.Drawing.Size(168, 29)
-        Me.txt_main_reference.TabIndex = 4
+        Me.txt_main_reference_1.Location = New System.Drawing.Point(144, 36)
+        Me.txt_main_reference_1.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_main_reference_1.Name = "txt_main_reference_1"
+        Me.txt_main_reference_1.ReadOnly = True
+        Me.txt_main_reference_1.Size = New System.Drawing.Size(51, 29)
+        Me.txt_main_reference_1.TabIndex = 4
         '
         'GroupBox5
         '
@@ -780,6 +796,7 @@ Partial Class frmMain
         Me.MachineLog.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MachineLog.Location = New System.Drawing.Point(7, 28)
         Me.MachineLog.Name = "MachineLog"
+        Me.MachineLog.ReadOnly = True
         Me.MachineLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.MachineLog.Size = New System.Drawing.Size(237, 218)
         Me.MachineLog.TabIndex = 4
@@ -1361,6 +1378,9 @@ Partial Class frmMain
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.cb_cfg_ref_3)
+        Me.GroupBox3.Controls.Add(Me.cb_cfg_ref_2)
+        Me.GroupBox3.Controls.Add(Me.cb_cfg_ref_1)
         Me.GroupBox3.Controls.Add(Me.btn_save_config)
         Me.GroupBox3.Controls.Add(Me.cb_cfg_use_cav6)
         Me.GroupBox3.Controls.Add(Me.cb_cfg_use_cav5)
@@ -1396,7 +1416,9 @@ Partial Class frmMain
         Me.GroupBox3.Controls.Add(Me.txt_cfg_id)
         Me.GroupBox3.Controls.Add(Me.txt_cfg_nbc)
         Me.GroupBox3.Controls.Add(Me.txt_cfg_date)
-        Me.GroupBox3.Controls.Add(Me.txt_cfg_ref)
+        Me.GroupBox3.Controls.Add(Me.TextBox39)
+        Me.GroupBox3.Controls.Add(Me.TextBox26)
+        Me.GroupBox3.Controls.Add(Me.TextBox25)
         Me.GroupBox3.Location = New System.Drawing.Point(26, 34)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(624, 500)
@@ -1410,7 +1432,7 @@ Partial Class frmMain
         Me.btn_save_config.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_save_config.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_save_config.Image = CType(resources.GetObject("btn_save_config.Image"), System.Drawing.Image)
-        Me.btn_save_config.Location = New System.Drawing.Point(529, 396)
+        Me.btn_save_config.Location = New System.Drawing.Point(529, 411)
         Me.btn_save_config.Name = "btn_save_config"
         Me.btn_save_config.Size = New System.Drawing.Size(79, 79)
         Me.btn_save_config.TabIndex = 9
@@ -1422,7 +1444,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_cav6.FormattingEnabled = True
         Me.cb_cfg_use_cav6.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_cav6.Location = New System.Drawing.Point(440, 315)
+        Me.cb_cfg_use_cav6.Location = New System.Drawing.Point(440, 370)
         Me.cb_cfg_use_cav6.Name = "cb_cfg_use_cav6"
         Me.cb_cfg_use_cav6.Size = New System.Drawing.Size(168, 29)
         Me.cb_cfg_use_cav6.TabIndex = 4
@@ -1431,7 +1453,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_cav5.FormattingEnabled = True
         Me.cb_cfg_use_cav5.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_cav5.Location = New System.Drawing.Point(440, 280)
+        Me.cb_cfg_use_cav5.Location = New System.Drawing.Point(440, 335)
         Me.cb_cfg_use_cav5.Name = "cb_cfg_use_cav5"
         Me.cb_cfg_use_cav5.Size = New System.Drawing.Size(168, 29)
         Me.cb_cfg_use_cav5.TabIndex = 4
@@ -1440,7 +1462,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_cav4.FormattingEnabled = True
         Me.cb_cfg_use_cav4.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_cav4.Location = New System.Drawing.Point(440, 245)
+        Me.cb_cfg_use_cav4.Location = New System.Drawing.Point(440, 300)
         Me.cb_cfg_use_cav4.Name = "cb_cfg_use_cav4"
         Me.cb_cfg_use_cav4.Size = New System.Drawing.Size(168, 29)
         Me.cb_cfg_use_cav4.TabIndex = 4
@@ -1449,7 +1471,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_cav3.FormattingEnabled = True
         Me.cb_cfg_use_cav3.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_cav3.Location = New System.Drawing.Point(440, 210)
+        Me.cb_cfg_use_cav3.Location = New System.Drawing.Point(440, 265)
         Me.cb_cfg_use_cav3.Name = "cb_cfg_use_cav3"
         Me.cb_cfg_use_cav3.Size = New System.Drawing.Size(168, 29)
         Me.cb_cfg_use_cav3.TabIndex = 4
@@ -1458,7 +1480,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_cav2.FormattingEnabled = True
         Me.cb_cfg_use_cav2.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_cav2.Location = New System.Drawing.Point(440, 175)
+        Me.cb_cfg_use_cav2.Location = New System.Drawing.Point(440, 230)
         Me.cb_cfg_use_cav2.Name = "cb_cfg_use_cav2"
         Me.cb_cfg_use_cav2.Size = New System.Drawing.Size(168, 29)
         Me.cb_cfg_use_cav2.TabIndex = 4
@@ -1467,7 +1489,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_cav1.FormattingEnabled = True
         Me.cb_cfg_use_cav1.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_cav1.Location = New System.Drawing.Point(440, 140)
+        Me.cb_cfg_use_cav1.Location = New System.Drawing.Point(440, 195)
         Me.cb_cfg_use_cav1.Name = "cb_cfg_use_cav1"
         Me.cb_cfg_use_cav1.Size = New System.Drawing.Size(168, 29)
         Me.cb_cfg_use_cav1.TabIndex = 4
@@ -1476,7 +1498,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_time.FormattingEnabled = True
         Me.cb_cfg_use_time.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_time.Location = New System.Drawing.Point(177, 289)
+        Me.cb_cfg_use_time.Location = New System.Drawing.Point(177, 332)
         Me.cb_cfg_use_time.Name = "cb_cfg_use_time"
         Me.cb_cfg_use_time.Size = New System.Drawing.Size(110, 29)
         Me.cb_cfg_use_time.TabIndex = 3
@@ -1485,7 +1507,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_c.FormattingEnabled = True
         Me.cb_cfg_use_c.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_c.Location = New System.Drawing.Point(177, 240)
+        Me.cb_cfg_use_c.Location = New System.Drawing.Point(177, 283)
         Me.cb_cfg_use_c.Name = "cb_cfg_use_c"
         Me.cb_cfg_use_c.Size = New System.Drawing.Size(110, 29)
         Me.cb_cfg_use_c.TabIndex = 3
@@ -1494,7 +1516,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_mode.FormattingEnabled = True
         Me.cb_cfg_mode.Items.AddRange(New Object() {"AC", "DC"})
-        Me.cb_cfg_mode.Location = New System.Drawing.Point(177, 145)
+        Me.cb_cfg_mode.Location = New System.Drawing.Point(177, 188)
         Me.cb_cfg_mode.Name = "cb_cfg_mode"
         Me.cb_cfg_mode.Size = New System.Drawing.Size(110, 29)
         Me.cb_cfg_mode.TabIndex = 3
@@ -1503,7 +1525,7 @@ Partial Class frmMain
         '
         Me.cb_cfg_use_v.FormattingEnabled = True
         Me.cb_cfg_use_v.Items.AddRange(New Object() {"Enable", "Disable"})
-        Me.cb_cfg_use_v.Location = New System.Drawing.Point(177, 193)
+        Me.cb_cfg_use_v.Location = New System.Drawing.Point(177, 236)
         Me.cb_cfg_use_v.Name = "cb_cfg_use_v"
         Me.cb_cfg_use_v.Size = New System.Drawing.Size(110, 29)
         Me.cb_cfg_use_v.TabIndex = 3
@@ -1511,7 +1533,7 @@ Partial Class frmMain
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(7, 276)
+        Me.Label18.Location = New System.Drawing.Point(7, 319)
         Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(101, 42)
@@ -1521,7 +1543,7 @@ Partial Class frmMain
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(7, 227)
+        Me.Label17.Location = New System.Drawing.Point(7, 270)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(161, 42)
@@ -1531,7 +1553,7 @@ Partial Class frmMain
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(7, 145)
+        Me.Label15.Location = New System.Drawing.Point(7, 188)
         Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(107, 21)
@@ -1541,7 +1563,7 @@ Partial Class frmMain
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(7, 180)
+        Me.Label16.Location = New System.Drawing.Point(7, 223)
         Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(62, 42)
@@ -1551,7 +1573,7 @@ Partial Class frmMain
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(328, 318)
+        Me.Label29.Location = New System.Drawing.Point(328, 373)
         Me.Label29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(59, 21)
@@ -1561,7 +1583,7 @@ Partial Class frmMain
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(7, 367)
+        Me.Label20.Location = New System.Drawing.Point(7, 410)
         Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(104, 63)
@@ -1571,7 +1593,7 @@ Partial Class frmMain
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(328, 283)
+        Me.Label28.Location = New System.Drawing.Point(328, 338)
         Me.Label28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(59, 21)
@@ -1581,7 +1603,7 @@ Partial Class frmMain
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(7, 439)
+        Me.Label21.Location = New System.Drawing.Point(328, 35)
         Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(86, 42)
@@ -1591,7 +1613,7 @@ Partial Class frmMain
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(328, 248)
+        Me.Label27.Location = New System.Drawing.Point(328, 303)
         Me.Label27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(59, 21)
@@ -1601,7 +1623,7 @@ Partial Class frmMain
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(7, 330)
+        Me.Label19.Location = New System.Drawing.Point(7, 373)
         Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(104, 21)
@@ -1611,7 +1633,7 @@ Partial Class frmMain
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(328, 213)
+        Me.Label26.Location = New System.Drawing.Point(328, 268)
         Me.Label26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(59, 21)
@@ -1621,7 +1643,7 @@ Partial Class frmMain
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(7, 108)
+        Me.Label7.Location = New System.Drawing.Point(7, 151)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(92, 21)
@@ -1631,7 +1653,7 @@ Partial Class frmMain
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(328, 178)
+        Me.Label25.Location = New System.Drawing.Point(328, 233)
         Me.Label25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(59, 21)
@@ -1641,7 +1663,7 @@ Partial Class frmMain
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(7, 71)
+        Me.Label6.Location = New System.Drawing.Point(7, 114)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(78, 21)
@@ -1651,7 +1673,7 @@ Partial Class frmMain
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(328, 143)
+        Me.Label24.Location = New System.Drawing.Point(328, 198)
         Me.Label24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(59, 21)
@@ -1661,7 +1683,7 @@ Partial Class frmMain
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(328, 90)
+        Me.Label23.Location = New System.Drawing.Point(328, 145)
         Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(82, 42)
@@ -1671,7 +1693,7 @@ Partial Class frmMain
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(328, 39)
+        Me.Label22.Location = New System.Drawing.Point(328, 94)
         Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(76, 42)
@@ -1681,7 +1703,7 @@ Partial Class frmMain
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(7, 37)
+        Me.Label5.Location = New System.Drawing.Point(7, 58)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(79, 21)
@@ -1690,7 +1712,7 @@ Partial Class frmMain
         '
         'txt_cfg_time_val
         '
-        Me.txt_cfg_time_val.Location = New System.Drawing.Point(119, 446)
+        Me.txt_cfg_time_val.Location = New System.Drawing.Point(440, 42)
         Me.txt_cfg_time_val.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_cfg_time_val.Name = "txt_cfg_time_val"
         Me.txt_cfg_time_val.Size = New System.Drawing.Size(168, 29)
@@ -1698,7 +1720,7 @@ Partial Class frmMain
         '
         'txt_cfg_c_val
         '
-        Me.txt_cfg_c_val.Location = New System.Drawing.Point(119, 385)
+        Me.txt_cfg_c_val.Location = New System.Drawing.Point(119, 428)
         Me.txt_cfg_c_val.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_cfg_c_val.Name = "txt_cfg_c_val"
         Me.txt_cfg_c_val.Size = New System.Drawing.Size(168, 29)
@@ -1706,7 +1728,7 @@ Partial Class frmMain
         '
         'txt_cfg_v_val
         '
-        Me.txt_cfg_v_val.Location = New System.Drawing.Point(119, 325)
+        Me.txt_cfg_v_val.Location = New System.Drawing.Point(119, 368)
         Me.txt_cfg_v_val.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_cfg_v_val.Name = "txt_cfg_v_val"
         Me.txt_cfg_v_val.Size = New System.Drawing.Size(168, 29)
@@ -1714,7 +1736,7 @@ Partial Class frmMain
         '
         'txt_cfg_id
         '
-        Me.txt_cfg_id.Location = New System.Drawing.Point(119, 103)
+        Me.txt_cfg_id.Location = New System.Drawing.Point(119, 146)
         Me.txt_cfg_id.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_cfg_id.Name = "txt_cfg_id"
         Me.txt_cfg_id.Size = New System.Drawing.Size(168, 29)
@@ -1722,7 +1744,7 @@ Partial Class frmMain
         '
         'txt_cfg_nbc
         '
-        Me.txt_cfg_nbc.Location = New System.Drawing.Point(440, 46)
+        Me.txt_cfg_nbc.Location = New System.Drawing.Point(440, 101)
         Me.txt_cfg_nbc.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_cfg_nbc.Name = "txt_cfg_nbc"
         Me.txt_cfg_nbc.Size = New System.Drawing.Size(168, 29)
@@ -1730,19 +1752,11 @@ Partial Class frmMain
         '
         'txt_cfg_date
         '
-        Me.txt_cfg_date.Location = New System.Drawing.Point(119, 66)
+        Me.txt_cfg_date.Location = New System.Drawing.Point(119, 109)
         Me.txt_cfg_date.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_cfg_date.Name = "txt_cfg_date"
         Me.txt_cfg_date.Size = New System.Drawing.Size(168, 29)
         Me.txt_cfg_date.TabIndex = 0
-        '
-        'txt_cfg_ref
-        '
-        Me.txt_cfg_ref.Location = New System.Drawing.Point(119, 32)
-        Me.txt_cfg_ref.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_cfg_ref.Name = "txt_cfg_ref"
-        Me.txt_cfg_ref.Size = New System.Drawing.Size(168, 29)
-        Me.txt_cfg_ref.TabIndex = 0
         '
         'Manual
         '
@@ -3790,6 +3804,9 @@ Partial Class frmMain
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.txt_coloumn_index)
+        Me.TabPage1.Controls.Add(Me.txtSearch)
+        Me.TabPage1.Controls.Add(Me.btn_refresh_csv)
         Me.TabPage1.Controls.Add(Me.DataGridView2)
         Me.TabPage1.Location = New System.Drawing.Point(4, 30)
         Me.TabPage1.Name = "TabPage1"
@@ -3798,100 +3815,123 @@ Partial Class frmMain
         Me.TabPage1.Text = "CSVDatalog"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'txt_coloumn_index
+        '
+        Me.txt_coloumn_index.Location = New System.Drawing.Point(155, 429)
+        Me.txt_coloumn_index.Name = "txt_coloumn_index"
+        Me.txt_coloumn_index.Size = New System.Drawing.Size(100, 29)
+        Me.txt_coloumn_index.TabIndex = 39
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(18, 429)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(100, 29)
+        Me.txtSearch.TabIndex = 38
+        '
+        'btn_refresh_csv
+        '
+        Me.btn_refresh_csv.Location = New System.Drawing.Point(18, 475)
+        Me.btn_refresh_csv.Name = "btn_refresh_csv"
+        Me.btn_refresh_csv.Size = New System.Drawing.Size(75, 72)
+        Me.btn_refresh_csv.TabIndex = 37
+        Me.btn_refresh_csv.Text = "Search"
+        Me.btn_refresh_csv.UseVisualStyleBackColor = True
+        '
         'DataGridView2
         '
         Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14})
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColumnNo, Me.ColumnData, Me.ColumnReference, Me.ColumnOpeId, Me.ColumnCavity, Me.ColumnCycCount, Me.ColumnCurrMod, Me.ColumnVoltCtrl, Me.ColumnVolt, Me.ColumnCurrentCtrl, Me.ColumnCurrent, Me.ColumnTimeCtrl, Me.ColumnTimeCount, Me.ColumnFinalResult})
         Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DataGridView2.Size = New System.Drawing.Size(968, 365)
         Me.DataGridView2.TabIndex = 36
         '
-        'Column1
+        'ColumnNo
         '
-        Me.Column1.HeaderText = "No"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 56
+        Me.ColumnNo.HeaderText = "No"
+        Me.ColumnNo.Name = "ColumnNo"
+        Me.ColumnNo.Width = 56
         '
-        'Column2
+        'ColumnData
         '
-        Me.Column2.HeaderText = "Date"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 67
+        Me.ColumnData.HeaderText = "Date"
+        Me.ColumnData.Name = "ColumnData"
+        Me.ColumnData.Width = 67
         '
-        'Column3
+        'ColumnReference
         '
-        Me.Column3.HeaderText = "Reference"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 104
+        Me.ColumnReference.HeaderText = "Reference"
+        Me.ColumnReference.Name = "ColumnReference"
+        Me.ColumnReference.Width = 104
         '
-        'Column4
+        'ColumnOpeId
         '
-        Me.Column4.HeaderText = "Operator ID"
-        Me.Column4.Name = "Column4"
-        Me.Column4.Width = 117
+        Me.ColumnOpeId.HeaderText = "Operator ID"
+        Me.ColumnOpeId.Name = "ColumnOpeId"
+        Me.ColumnOpeId.Width = 117
         '
-        'Column5
+        'ColumnCavity
         '
-        Me.Column5.HeaderText = "Cavity"
-        Me.Column5.Name = "Column5"
-        Me.Column5.Width = 78
+        Me.ColumnCavity.HeaderText = "Cavity"
+        Me.ColumnCavity.Name = "ColumnCavity"
+        Me.ColumnCavity.Width = 78
         '
-        'Column6
+        'ColumnCycCount
         '
-        Me.Column6.HeaderText = "Cycle Count"
-        Me.Column6.Name = "Column6"
-        Me.Column6.Width = 118
+        Me.ColumnCycCount.HeaderText = "Cycle Count"
+        Me.ColumnCycCount.Name = "ColumnCycCount"
+        Me.ColumnCycCount.Width = 118
         '
-        'Column7
+        'ColumnCurrMod
         '
-        Me.Column7.HeaderText = "Current Mode"
-        Me.Column7.Name = "Column7"
-        Me.Column7.Width = 132
+        Me.ColumnCurrMod.HeaderText = "Current Mode"
+        Me.ColumnCurrMod.Name = "ColumnCurrMod"
+        Me.ColumnCurrMod.Width = 132
         '
-        'Column8
+        'ColumnVoltCtrl
         '
-        Me.Column8.HeaderText = "Voltage Control"
-        Me.Column8.Name = "Column8"
-        Me.Column8.Width = 143
+        Me.ColumnVoltCtrl.HeaderText = "Voltage Control"
+        Me.ColumnVoltCtrl.Name = "ColumnVoltCtrl"
+        Me.ColumnVoltCtrl.Width = 143
         '
-        'Column9
+        'ColumnVolt
         '
-        Me.Column9.HeaderText = "Voltage (V)"
-        Me.Column9.Name = "Column9"
-        Me.Column9.Width = 111
+        Me.ColumnVolt.HeaderText = "Voltage (V)"
+        Me.ColumnVolt.Name = "ColumnVolt"
+        Me.ColumnVolt.Width = 111
         '
-        'Column10
+        'ColumnCurrentCtrl
         '
-        Me.Column10.HeaderText = "Current Control"
-        Me.Column10.Name = "Column10"
-        Me.Column10.Width = 144
+        Me.ColumnCurrentCtrl.HeaderText = "Current Control"
+        Me.ColumnCurrentCtrl.Name = "ColumnCurrentCtrl"
+        Me.ColumnCurrentCtrl.Width = 144
         '
-        'Column11
+        'ColumnCurrent
         '
-        Me.Column11.HeaderText = "Current (A)"
-        Me.Column11.Name = "Column11"
-        Me.Column11.Width = 112
+        Me.ColumnCurrent.HeaderText = "Current (A)"
+        Me.ColumnCurrent.Name = "ColumnCurrent"
+        Me.ColumnCurrent.Width = 112
         '
-        'Column12
+        'ColumnTimeCtrl
         '
-        Me.Column12.HeaderText = "Time Control"
-        Me.Column12.Name = "Column12"
-        Me.Column12.Width = 125
+        Me.ColumnTimeCtrl.HeaderText = "Time Control"
+        Me.ColumnTimeCtrl.Name = "ColumnTimeCtrl"
+        Me.ColumnTimeCtrl.Width = 125
         '
-        'Column13
+        'ColumnTimeCount
         '
-        Me.Column13.HeaderText = "Time Count"
-        Me.Column13.Name = "Column13"
-        Me.Column13.Width = 115
+        Me.ColumnTimeCount.HeaderText = "Time Count"
+        Me.ColumnTimeCount.Name = "ColumnTimeCount"
+        Me.ColumnTimeCount.Width = 115
         '
-        'Column14
+        'ColumnFinalResult
         '
-        Me.Column14.HeaderText = "Final Result"
-        Me.Column14.Name = "Column14"
-        Me.Column14.Width = 115
+        Me.ColumnFinalResult.HeaderText = "Final Result"
+        Me.ColumnFinalResult.Name = "ColumnFinalResult"
+        Me.ColumnFinalResult.Width = 115
         '
         'txt_alarm
         '
@@ -3912,6 +3952,87 @@ Partial Class frmMain
         Me.lbl_user.TabIndex = 38
         Me.lbl_user.Text = "OPE"
         Me.lbl_user.Visible = False
+        '
+        'TextBox25
+        '
+        Me.TextBox25.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox25.Location = New System.Drawing.Point(119, 38)
+        Me.TextBox25.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox25.Name = "TextBox25"
+        Me.TextBox25.ReadOnly = True
+        Me.TextBox25.Size = New System.Drawing.Size(52, 25)
+        Me.TextBox25.TabIndex = 0
+        Me.TextBox25.Text = "CAV 1-2"
+        Me.TextBox25.WordWrap = False
+        '
+        'TextBox26
+        '
+        Me.TextBox26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox26.Location = New System.Drawing.Point(235, 38)
+        Me.TextBox26.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox26.Name = "TextBox26"
+        Me.TextBox26.ReadOnly = True
+        Me.TextBox26.Size = New System.Drawing.Size(52, 25)
+        Me.TextBox26.TabIndex = 0
+        Me.TextBox26.Text = "CAV 5-6"
+        Me.TextBox26.WordWrap = False
+        '
+        'TextBox39
+        '
+        Me.TextBox39.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox39.Location = New System.Drawing.Point(177, 38)
+        Me.TextBox39.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox39.Name = "TextBox39"
+        Me.TextBox39.ReadOnly = True
+        Me.TextBox39.Size = New System.Drawing.Size(52, 25)
+        Me.TextBox39.TabIndex = 0
+        Me.TextBox39.Text = "CAV 3-4"
+        Me.TextBox39.WordWrap = False
+        '
+        'cb_cfg_ref_1
+        '
+        Me.cb_cfg_ref_1.FormattingEnabled = True
+        Me.cb_cfg_ref_1.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
+        Me.cb_cfg_ref_1.Location = New System.Drawing.Point(119, 70)
+        Me.cb_cfg_ref_1.Name = "cb_cfg_ref_1"
+        Me.cb_cfg_ref_1.Size = New System.Drawing.Size(52, 29)
+        Me.cb_cfg_ref_1.TabIndex = 10
+        '
+        'cb_cfg_ref_2
+        '
+        Me.cb_cfg_ref_2.FormattingEnabled = True
+        Me.cb_cfg_ref_2.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
+        Me.cb_cfg_ref_2.Location = New System.Drawing.Point(177, 70)
+        Me.cb_cfg_ref_2.Name = "cb_cfg_ref_2"
+        Me.cb_cfg_ref_2.Size = New System.Drawing.Size(52, 29)
+        Me.cb_cfg_ref_2.TabIndex = 10
+        '
+        'cb_cfg_ref_3
+        '
+        Me.cb_cfg_ref_3.FormattingEnabled = True
+        Me.cb_cfg_ref_3.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
+        Me.cb_cfg_ref_3.Location = New System.Drawing.Point(235, 70)
+        Me.cb_cfg_ref_3.Name = "cb_cfg_ref_3"
+        Me.cb_cfg_ref_3.Size = New System.Drawing.Size(52, 29)
+        Me.cb_cfg_ref_3.TabIndex = 10
+        '
+        'txt_main_reference_3
+        '
+        Me.txt_main_reference_3.Location = New System.Drawing.Point(261, 36)
+        Me.txt_main_reference_3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_main_reference_3.Name = "txt_main_reference_3"
+        Me.txt_main_reference_3.ReadOnly = True
+        Me.txt_main_reference_3.Size = New System.Drawing.Size(51, 29)
+        Me.txt_main_reference_3.TabIndex = 4
+        '
+        'txt_main_reference_2
+        '
+        Me.txt_main_reference_2.Location = New System.Drawing.Point(203, 36)
+        Me.txt_main_reference_2.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_main_reference_2.Name = "txt_main_reference_2"
+        Me.txt_main_reference_2.ReadOnly = True
+        Me.txt_main_reference_2.Size = New System.Drawing.Size(51, 29)
+        Me.txt_main_reference_2.TabIndex = 4
         '
         'frmMain
         '
@@ -4023,6 +4144,7 @@ Partial Class frmMain
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -4094,7 +4216,6 @@ Partial Class frmMain
     Friend WithEvents Label5 As Label
     Friend WithEvents txt_cfg_id As TextBox
     Friend WithEvents txt_cfg_date As TextBox
-    Friend WithEvents txt_cfg_ref As TextBox
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents ComboBox3 As ComboBox
@@ -4130,7 +4251,7 @@ Partial Class frmMain
     Friend WithEvents Label32 As Label
     Friend WithEvents txt_main_id As TextBox
     Friend WithEvents txt_main_date As TextBox
-    Friend WithEvents txt_main_reference As TextBox
+    Friend WithEvents txt_main_reference_1 As TextBox
     Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents RadioButton6 As RadioButton
     Friend WithEvents RadioButton3 As RadioButton
@@ -4339,21 +4460,6 @@ Partial Class frmMain
     Friend WithEvents secureLvlMan As Label
     Friend WithEvents lbl_user As Label
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents DataGridView2 As DataGridView
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
     Friend WithEvents GroupBox32 As GroupBox
     Friend WithEvents Label104 As Label
     Friend WithEvents Label103 As Label
@@ -4368,4 +4474,30 @@ Partial Class frmMain
     Friend WithEvents ind_fdut2 As PictureBox
     Friend WithEvents ind_fdut1 As PictureBox
     Friend WithEvents manualTrig As Button
+    Friend WithEvents btn_refresh_csv As Button
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents ColumnNo As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnData As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnReference As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnOpeId As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnCavity As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnCycCount As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnCurrMod As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnVoltCtrl As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnVolt As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnCurrentCtrl As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnCurrent As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnTimeCtrl As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnTimeCount As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnFinalResult As DataGridViewTextBoxColumn
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents txt_coloumn_index As TextBox
+    Friend WithEvents TextBox25 As TextBox
+    Friend WithEvents cb_cfg_ref_3 As ComboBox
+    Friend WithEvents cb_cfg_ref_2 As ComboBox
+    Friend WithEvents cb_cfg_ref_1 As ComboBox
+    Friend WithEvents TextBox39 As TextBox
+    Friend WithEvents TextBox26 As TextBox
+    Friend WithEvents txt_main_reference_2 As TextBox
+    Friend WithEvents txt_main_reference_3 As TextBox
 End Class

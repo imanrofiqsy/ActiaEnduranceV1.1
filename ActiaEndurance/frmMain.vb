@@ -1,7 +1,9 @@
 ﻿Imports IniParser
 Imports IniParser.Model
 Imports System.Threading
-Imports System.Data.SqlClient
+Imports System.IO
+Imports System.Text
+Imports System.Timers
 
 Public Class frmMain
     Dim ThreadLoadingApp As Thread
@@ -116,27 +118,27 @@ Public Class frmMain
                 With Config
                     .IPSight = configData("KEYSIGHT")("IP")
                     .PortSight = configData("KEYSIGHT")("Port")
-                    ConnectToKS(.IPSight, .PortSight)
-                    If KSconnected Then
-                        'MainTab
-                        ind_keysight.BackColor = Color.Lime
+                    'ConnectToKS(.IPSight, .PortSight)
+                    'If KSconnected Then
+                    '    'MainTab
+                    '    ind_keysight.BackColor = Color.Lime
 
-                        'SettingTab
-                        Invoke(Sub()
-                                   lbl_keysight_ind.Text = "Connected"
-                                   lbl_keysight_ind.BackColor = Color.LimeGreen
-                               End Sub)
+                    '    'SettingTab
+                    '    Invoke(Sub()
+                    '               lbl_keysight_ind.Text = "Connected"
+                    '               lbl_keysight_ind.BackColor = Color.LimeGreen
+                    '           End Sub)
 
-                    Else
-                        'MainTab
-                        ind_keysight.BackColor = Color.Red
+                    'Else
+                    '    'MainTab
+                    '    ind_keysight.BackColor = Color.Red
 
-                        'SettingTab
-                        Invoke(Sub()
-                                   lbl_keysight_ind.Text = "Disconnected"
-                                   lbl_keysight_ind.BackColor = Color.DarkRed
-                               End Sub)
-                    End If
+                    '    'SettingTab
+                    '    Invoke(Sub()
+                    '               lbl_keysight_ind.Text = "Disconnected"
+                    '               lbl_keysight_ind.BackColor = Color.DarkRed
+                    '           End Sub)
+                    'End If
                 End With
 
                 LoadingMSG("Establishing connection to Database Server...")
@@ -384,6 +386,11 @@ Public Class frmMain
                         End If
                     End With
 
+                    'type
+                    With Type
+                        Modbus.WriteInteger(10020, .NbCyc)
+                    End With
+
                     'General Communication
                     With GeneralComm
                         'PC To PLC
@@ -393,9 +400,6 @@ Public Class frmMain
                         Modbus.WriteInteger(10003, .rdyStart)
                         Modbus.WriteInteger(10005, .FinVol)
                         Modbus.WriteInteger(10007, .FinCurr)
-
-                        .trigVol = Modbus.ReadInteger(10004)
-                        .trigCurr = Modbus.ReadInteger(10006)
 
                         With EnCavity
                             Modbus.WriteInteger(10008, CInt(.Cav1))
@@ -408,7 +412,7 @@ Public Class frmMain
 
                         'PLC To PC
                         .trigVol = Modbus.ReadInteger(10004)
-                        .trigCurr = Modbus.ReadInteger(10006)
+                        .trigSaveCurr = Modbus.ReadInteger(10006)
 
                         If ReadInteger(10014) = 1 Then
                             ind_cav1.BackColor = Color.Lime
@@ -446,18 +450,101 @@ Public Class frmMain
                     'Load Manual Sensor
                     LoadSensorManual()
 
-                    'Data Aquisition
-                    'CavCycMeas()
+                    With CurrentVal
+                        .Cur1 = ReadFloat(40000)
+                        .Cur2 = ReadFloat(40002)
+                        .Cur3 = ReadFloat(40004)
+                        .Cur4 = ReadFloat(40006)
+                        .Cur5 = ReadFloat(40008)
+                        .Cur6 = ReadFloat(40010)
 
-                    'Demo Cylinder
-                    If GeneralComm.trigCurr = 1 Then
-                        demo_measure()
+                        Invoke(Sub()
+                                   TextBox1.Text = .Cur1
+                                   TextBox2.Text = .Cur2
+                                   TextBox3.Text = .Cur3
+                                   TextBox4.Text = .Cur4
+                                   TextBox5.Text = .Cur5
+                                   TextBox6.Text = .Cur6
+
+                                   txt_main_reference_1.Text = Logging.Reference_1
+                                   txt_main_reference_2.Text = Logging.Reference_2
+                                   txt_main_reference_3.Text = Logging.Reference_3
+                                   txt_main_date.Text = Logging.StartDate
+                                   txt_main_id.Text = Logging.OpeId
+                               End Sub)
+                    End With
+
+                    If GeneralComm.trigSaveCurr = 1 Then
+                        Modbus.WriteInteger(10006, 0)
+                        With Logging
+                            .CycleCount += 1
+
+                            Console.WriteLine(.CycleCount)
+                            ' Path to the CSV file
+                            Dim filePath As String = My.Application.Info.DirectoryPath & "\Log\Log.csv"
+                            ' Create a StreamWriter to write to the file
+                            Using writer As New StreamWriter(filePath, append:=True)
+                                ' Iterate through the list and write each row to the file
+                                If EnCavity.Cav1 = "1" Then
+                                    Dim data_cav As New List(Of String()) From {
+                                        New String() { .No.ToString, .StartDate, .Reference_1, .OpeId, "Cavity 1", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur1, .UseTime, .Time, .FinalResult}
+                                    }
+                                    For Each row As String() In data_cav
+                                        writer.WriteLine(String.Join(",", row))
+                                    Next
+                                End If
+
+                                If EnCavity.Cav2 = "1" Then
+                                    Dim data_cav As New List(Of String()) From {
+                                        New String() { .No.ToString, .StartDate, .Reference_1, .OpeId, "Cavity 2", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur2, .UseTime, .Time, .FinalResult}
+                                    }
+                                    For Each row As String() In data_cav
+                                        writer.WriteLine(String.Join(",", row))
+                                    Next
+                                End If
+
+                                If EnCavity.Cav3 = "1" Then
+                                    Dim data_cav As New List(Of String()) From {
+                                        New String() { .No.ToString, .StartDate, .Reference_2, .OpeId, "Cavity 3", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur3, .UseTime, .Time, .FinalResult}
+                                    }
+                                    For Each row As String() In data_cav
+                                        writer.WriteLine(String.Join(",", row))
+                                    Next
+                                End If
+
+                                If EnCavity.Cav4 = "1" Then
+                                    Dim data_cav As New List(Of String()) From {
+                                        New String() { .No.ToString, .StartDate, .Reference_2, .OpeId, "Cavity 4", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur4, .UseTime, .Time, .FinalResult}
+                                    }
+                                    For Each row As String() In data_cav
+                                        writer.WriteLine(String.Join(",", row))
+                                    Next
+                                End If
+
+                                If EnCavity.Cav5 = "1" Then
+                                    Dim data_cav As New List(Of String()) From {
+                                        New String() { .No.ToString, .StartDate, .Reference_3, .OpeId, "Cavity 5", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur5, .UseTime, .Time, .FinalResult}
+                                    }
+                                    For Each row As String() In data_cav
+                                        writer.WriteLine(String.Join(",", row))
+                                    Next
+                                End If
+
+                                If EnCavity.Cav6 = "1" Then
+                                    Dim data_cav As New List(Of String()) From {
+                                        New String() { .No.ToString, .StartDate, .Reference_3, .OpeId, "Cavity 6", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur6, .UseTime, .Time, .FinalResult}
+                                    }
+                                    For Each row As String() In data_cav
+                                        writer.WriteLine(String.Join(",", row))
+                                    Next
+                                End If
+                            End Using
+                        End With
+                        Modbus.WriteInteger(10007, 1)
                     End If
                 End If
             Catch ex As Exception
-                If ex.Message <> "Input string was not in a correct format." Then
-                    IsConnected = False
-                End If
+                IsConnected = False
             End Try
 
             Thread.Sleep(40)
@@ -564,42 +651,6 @@ Public Class frmMain
                     End If
 
                 Else
-                    .alarmMsg = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication"
-
-                    'MainTab
-                    txtColor = Color.DarkRed
-                    txtBorder = BorderStyle.FixedSingle
-                    ind_keysight.BackColor = Color.Red
-
-                    'SettingTab
-                    Invoke(Sub()
-                               lbl_keysight_ind.Text = "Disconnected"
-                               lbl_keysight_ind.BackColor = Color.DarkRed
-                           End Sub)
-                    If txt_alarm.Text = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication" And responseKSNo = 0 Then
-                        Dim responseKS As DialogResult = MessageBox.Show("Do you want to reconnect to KEYSIGHT?", "KEYSIGHT COMMUNICATION ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
-                        If responseKS = DialogResult.Yes Then
-                            Try
-                                ConnectToKS(Config.IPSight, Config.PortSight)
-                                If KSconnected Then
-                                    'MainTab
-                                    ind_keysight.BackColor = Color.Lime
-
-                                    'SettingTab
-                                    Invoke(Sub()
-                                               lbl_keysight_ind.Text = "Connected"
-                                               lbl_keysight_ind.BackColor = Color.LimeGreen
-                                           End Sub)
-                                End If
-                            Catch ex As Exception
-                            End Try
-                        Else
-                            responseKSNo = 1
-                        End If
-                    End If
-                End If
-
-                If Not KSconnected Then
                     .alarmMsg = "ALARM : Modbus Connection Error please check the PLC communication"
 
                     'MainTab
@@ -635,6 +686,41 @@ Public Class frmMain
                         End If
                     End If
                 End If
+                '.alarmMsg = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication"
+
+                ''MainTab
+                'txtColor = Color.DarkRed
+                'txtBorder = BorderStyle.FixedSingle
+                'ind_keysight.BackColor = Color.Red
+
+                ''SettingTab
+                'Invoke(Sub()
+                '           lbl_keysight_ind.Text = "Disconnected"
+                '           lbl_keysight_ind.BackColor = Color.DarkRed
+                '       End Sub)
+                'If txt_alarm.Text = "ALARM : KEYSIGHT Connection Error please check the KEYSIGHT communication" And responseKSNo = 0 Then
+                '    Dim responseKS As DialogResult = MessageBox.Show("Do you want to reconnect to KEYSIGHT?", "KEYSIGHT COMMUNICATION ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                '    If responseKS = DialogResult.Yes Then
+                '        Try
+                '            ConnectToKS(Config.IPSight, Config.PortSight)
+                '            If KSconnected Then
+                '                'MainTab
+                '                ind_keysight.BackColor = Color.Lime
+
+                '                'SettingTab
+                '                Invoke(Sub()
+                '                           lbl_keysight_ind.Text = "Connected"
+                '                           lbl_keysight_ind.BackColor = Color.LimeGreen
+                '                       End Sub)
+                '            End If
+                '        Catch ex As Exception
+                '        End Try
+                '    Else
+                '        responseKSNo = 1
+                '    End If
+                'End If
+
+
 
                 Invoke(Sub()
                            txt_alarm.Text = .alarmMsg
@@ -655,13 +741,22 @@ Public Class frmMain
             txt_IP_keysight.Text = configData("KEYSIGHT")("IP")
             txt_Port_keysight.Text = configData("KEYSIGHT")("Port")
 
-            .Reference = configData("Config")("Reference")
+            .Reference_1 = configData("Config")("Reference_1")
+            .Reference_2 = configData("Config")("Reference_2")
+            .Reference_3 = configData("Config")("Reference_3")
             .StartTime = configData("Config")("StartTime")
             .OperatorID = configData("Config")("OpeName")
 
-            txt_cfg_ref.Text = .Reference
-            txt_cfg_date.Text = .StartTime
-            txt_cfg_id.Text = .OperatorID
+            cb_cfg_ref_1.Text = txt_main_reference_1.Text = .Reference_1
+            cb_cfg_ref_2.Text = txt_main_reference_2.Text = .Reference_2
+            cb_cfg_ref_3.Text = txt_main_reference_2.Text = .Reference_3
+            txt_cfg_date.Text = txt_main_date.Text = .StartTime
+            txt_cfg_id.Text = txt_main_id.Text = .OperatorID
+            Logging.Reference_1 = .Reference_1
+            Logging.Reference_2 = .Reference_2
+            Logging.Reference_3 = .Reference_3
+            Logging.StartDate = .StartTime
+            Logging.OpeId = .OperatorID
         End With
 
         With Type
@@ -679,21 +774,31 @@ Public Class frmMain
             txt_cfg_c_val.Text = .CurrVal
             txt_cfg_time_val.Text = .TimeVal
             txt_cfg_nbc.Text = .NbCyc
+            Logging.CurrentMode = .CurrMode
+            Logging.Voltage = .VoltVal
+            Logging.Current = .CurrVal
+            Logging.Time = .TimeVal
 
             If .VolCtrl = "1" Then
                 cb_cfg_use_v.Text = "Enable"
+                Logging.UseVoltage = "Use Voltage"
             Else
                 cb_cfg_use_v.Text = "Disable"
+                Logging.UseVoltage = "Skip Voltage"
             End If
             If .CurrCtrl Then
                 cb_cfg_use_c.Text = "Enable"
+                Logging.UseCurrent = "Use Current"
             Else
                 cb_cfg_use_c.Text = "Disable"
+                Logging.UseCurrent = "Skip Current"
             End If
             If .TimeCtrl Then
                 cb_cfg_use_time.Text = "Enable"
+                Logging.UseTime = "Use Time"
             Else
                 cb_cfg_use_time.Text = "Disable"
+                Logging.UseTime = "Skip Time"
             End If
         End With
 
@@ -745,21 +850,9 @@ Public Class frmMain
             .UseTime = "YES"
         End With
 
-    End Sub
-    Private Sub LoadTable()
-        Try
-            Call DatabaseConnection.Connect()
-            Dim sc As New SqlCommand("SELECT * FROM tb_datalog", DatabaseConnection.Connection)
-            Dim adapter As New SqlDataAdapter(sc)
-            Dim ds As New DataSet
-
-            adapter.Fill(ds)
-            DataGridView1.DataSource = ds.Tables(0)
-        Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message)
-        Finally
-        End Try
-
+        With Logging
+            .No = configData("Config")("Count")
+        End With
     End Sub
 
     Private Sub LoadSensorManual()
@@ -869,36 +962,53 @@ Public Class frmMain
         End With
     End Sub
     Private Sub btn_save_config_Click(sender As Object, e As EventArgs) Handles btn_save_config.Click
-        If txt_cfg_ref.Text = "" Or txt_cfg_date.Text = "" Or txt_cfg_id.Text = "" Or txt_cfg_c_val.Text = "" Or txt_cfg_v_val.Text = "" Or txt_cfg_time_val.Text = "" Or txt_cfg_nbc.Text = "" Or cb_cfg_mode.Text = "" Or cb_cfg_use_v.Text = "" Or cb_cfg_use_c.Text = "" Or cb_cfg_use_time.Text = "" Or cb_cfg_use_cav1.Text = "" Or cb_cfg_use_cav2.Text = "" Or cb_cfg_use_cav3.Text = "" Or cb_cfg_use_cav4.Text = "" Or cb_cfg_use_cav5.Text = "" Or cb_cfg_use_cav6.Text = "" Then
+        If cb_cfg_ref_1.Text = "" Or cb_cfg_ref_2.Text = "" Or cb_cfg_ref_3.Text = "" Or txt_cfg_date.Text = "" Or txt_cfg_id.Text = "" Or txt_cfg_c_val.Text = "" Or txt_cfg_v_val.Text = "" Or txt_cfg_time_val.Text = "" Or txt_cfg_nbc.Text = "" Or cb_cfg_mode.Text = "" Or cb_cfg_use_v.Text = "" Or cb_cfg_use_c.Text = "" Or cb_cfg_use_time.Text = "" Or cb_cfg_use_cav1.Text = "" Or cb_cfg_use_cav2.Text = "" Or cb_cfg_use_cav3.Text = "" Or cb_cfg_use_cav4.Text = "" Or cb_cfg_use_cav5.Text = "" Or cb_cfg_use_cav6.Text = "" Then
             MsgBox("Please fill all data!")
             Exit Sub
         Else
             'With Config
-            configData("Config")("Reference") = txt_cfg_ref.Text
+            configData("Config")("Reference_1") = cb_cfg_ref_1.Text
+            Logging.Reference_1 = cb_cfg_ref_1.Text
+            configData("Config")("Reference_2") = cb_cfg_ref_2.Text
+            Logging.Reference_2 = cb_cfg_ref_2.Text
+            configData("Config")("Reference_3") = cb_cfg_ref_3.Text
+            Logging.Reference_3 = cb_cfg_ref_3.Text
             configData("Config")("StartTime") = txt_cfg_date.Text
+            Logging.StartDate = txt_cfg_date.Text
             configData("Config")("OpeName") = txt_cfg_id.Text
+            Logging.OpeId = txt_cfg_id.Text
 
             configData("Type")("CurrMode") = cb_cfg_mode.Text
+            Logging.CurrentMode = cb_cfg_mode.Text
             configData("Type")("ValVol") = txt_cfg_v_val.Text
             configData("Type")("ValCurr") = txt_cfg_c_val.Text
             configData("Type")("ValTime") = txt_cfg_time_val.Text
             configData("Type")("NbCyc") = txt_cfg_nbc.Text
+            If IsNumeric(txt_cfg_nbc.Text) Then
+                Type.NbCyc = CInt(txt_cfg_nbc.Text)
+            End If
 
             'With Type
             If cb_cfg_use_v.Text = "Enable" Then
                 configData("Type")("UseVol") = "1"
+                Logging.UseVoltage = "Use Voltage"
             Else
                 configData("Type")("UseVol") = "0"
+                Logging.UseVoltage = "Skip Voltage"
             End If
             If cb_cfg_use_c.Text = "Enable" Then
                 configData("Type")("UseCurr") = "1"
+                Logging.UseCurrent = "Use Current"
             Else
                 configData("Type")("UseCurr") = "0"
+                Logging.UseCurrent = "Skip Current"
             End If
             If cb_cfg_use_time.Text = "Enable" Then
                 configData("Type")("UseTime") = "1"
+                Logging.UseTime = "Use Time"
             Else
                 configData("Type")("UseTime") = "0"
+                Logging.UseTime = "Skip Time"
             End If
 
             'With Cavity
@@ -1037,28 +1147,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btn_search_Click(sender As Object, e As EventArgs) Handles btn_search.Click
-        If current_mode_ac.CheckState = CheckState.Unchecked And current_mode_dc.CheckState = CheckState.Unchecked And use_vol_yes.CheckState = CheckState.Unchecked And use_vol_no.CheckState = CheckState.Unchecked And use_curr_yes.CheckState = CheckState.Unchecked And use_curr_no.CheckState = CheckState.Unchecked And use_time_yes.CheckState = CheckState.Unchecked And use_time_no.CheckState = CheckState.Unchecked Then
-            Call DatabaseConnection.Connect()
-            Dim sc As New SqlCommand("SELECT * FROM tb_datalog", DatabaseConnection.Connection)
-            Dim adapter As New SqlDataAdapter(sc)
-            Dim ds As New DataSet
 
-            adapter.Fill(ds)
-            DataGridView1.DataSource = ds.Tables(0)
-        Else
-            Try
-                Call DatabaseConnection.Connect()
-                Dim sc As New SqlCommand("SELECT * FROM tb_datalog WHERE [Current Mode] = '" & Filter.CurrType & "' AND [Voltage Control] = '" & Filter.UseVol & "' AND [Current Control] = '" & Filter.UseCurr & "' AND [Time Control] = '" & Filter.UseTime & "'", DatabaseConnection.Connection)
-                Dim adapter As New SqlDataAdapter(sc)
-                Dim ds As New DataSet
-
-                adapter.Fill(ds)
-                DataGridView1.DataSource = ds.Tables(0)
-            Catch ex As Exception
-                MessageBox.Show("Error loading data: " & ex.Message)
-            Finally
-            End Try
-        End If
     End Sub
 
     Private Sub btn_clear_search_Click(sender As Object, e As EventArgs) Handles btn_clear_search.Click
@@ -1240,133 +1329,36 @@ Public Class frmMain
             MessageBox.Show("Error disconnecting from KEYSIGHT: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Dim count As Integer = 0
-    Private Sub demo_measure()
-        With CurrentVal
-            Select Case StateNumber
-                Case 0
-                    If GeneralComm.trigCurr = 1 Then
-                        GeneralComm.FinCurr = 0
-                        WriteToKS("ROUT:CLOSE (@102,105,108,111,114,117)")
-                        Thread.Sleep(100)
-                        WriteToKS("ROUT:OPEN (@103,106,109,112,115,118,101,104,107,110,113,116)")
-                        Thread.Sleep(100)
-                        Invoke(Sub()
-                                   TextBox1.Text = ""
-                                   TextBox2.Text = ""
-                                   TextBox3.Text = ""
-                                   TextBox4.Text = ""
-                                   TextBox5.Text = ""
-                                   TextBox6.Text = ""
-                               End Sub)
-                        StateNumber = 1
-                    End If
-                Case 1
-                    If EnCavity.Cav1 = "1" Then
-                        CurrMeasCycle("102", "103", "101", "221")
-                        .Cur1 = measResult
-                    Else
-                        .Cur1 = ""
-                    End If
-                    Invoke(Sub()
-                               TextBox1.Text = .Cur1
-                           End Sub)
-                    StateNumber = 2
-                Case 2
-                    If EnCavity.Cav2 = "1" Then
-                        CurrMeasCycle("105", "106", "104", "221")
-                        .Cur2 = measResult
-                    Else
-                        .Cur2 = ""
-                    End If
-                    Invoke(Sub()
-                               TextBox2.Text = .Cur2
-                           End Sub)
-                    StateNumber = 3
-                Case 3
-                    If EnCavity.Cav3 = "1" Then
-                        CurrMeasCycle("108", "109", "107", "221")
-                        .Cur3 = measResult
-                    Else
-                        .Cur3 = ""
-                    End If
-                    Invoke(Sub()
-                               TextBox3.Text = .Cur3
-                           End Sub)
-                    StateNumber = 4
-                Case 4
-                    If EnCavity.Cav4 = "1" Then
-                        CurrMeasCycle("111", "112", "110", "221")
-                        .Cur4 = measResult
-                    Else
-                        .Cur4 = ""
-                    End If
-                    Invoke(Sub()
-                               TextBox4.Text = .Cur4
-                           End Sub)
-                    StateNumber = 5
-                Case 5
-                    If EnCavity.Cav5 = "1" Then
-                        CurrMeasCycle("114", "115", "113", "221")
-                        .Cur5 = measResult
-                    Else
-                        .Cur5 = ""
-                    End If
-                    Invoke(Sub()
-                               TextBox5.Text = .Cur5
-                           End Sub)
-                    StateNumber = 6
-                Case 6
-                    If EnCavity.Cav5 = "1" Then
-                        CurrMeasCycle("117", "118", "116", "221")
-                        .Cur6 = measResult
-                    Else
-                        .Cur6 = ""
-                    End If
-                    Invoke(Sub()
-                               TextBox6.Text = .Cur6
-                           End Sub)
-                    StateNumber = 0
-                    GeneralComm.FinCurr = 1
-                    If count >= countVal - 1 Then
-                        GeneralComm.rdyStart = 0
-                    Else
-                        GeneralComm.rdyStart = 1
-                        count += 1
-                    End If
-            End Select
-        End With
-    End Sub
-    Private Sub CurrMeasCycle(CHa As String, CHb As String, CHc As String, CHd As String)
-        WriteToKS("CONF:CURR:DC 1,(@" & CHd & ")")
-        Thread.Sleep(50)
-        WriteToKS("ROUT:CLOSE (@" & CHb & ", " & CHc & ")")
-        Thread.Sleep(50)
-        WriteToKS("ROUT:OPEN (@" & CHa & ")")
-        Thread.Sleep(50)
-        WriteToKS("READ?")
-        For i As Integer = 1 To 5
-            Thread.Sleep(100)
-            My.Application.DoEvents()
-        Next
-        Dim str As String = ReadFromKS()
-        measResult = str.Substring(0, str.IndexOf("E") + 4)
-        'measResult = Decimal.Parse(measResult, System.Globalization.NumberStyles.Float).ToString
-        Thread.Sleep(50)
-        WriteToKS("ROUT:CLOSE (@" & CHa & ")")
-        Thread.Sleep(50)
-        WriteToKS("ROUT:OPEN (@" & CHb & ", " & CHc & ")")
-        Thread.Sleep(50)
 
-    End Sub
-    Dim countVal As Integer = 0
     Private Sub btn_run_MouseDown(sender As Object, e As MouseEventArgs) Handles btn_run.MouseDown
-        countVal = CInt(txt_cfg_nbc.Text)
         GeneralComm.rdyStart = 1
-        count = 0
+        Logging.No += 1
+        Logging.CycleCount = 0
+        configData("Config")("Count") = Logging.No
+        parser.WriteFile(configPath, configData)
     End Sub
 
     Private Sub btn_run_MouseUp(sender As Object, e As MouseEventArgs) Handles btn_run.MouseUp
         GeneralComm.rdyStart = 0
+    End Sub
+    Dim rowvalue As String
+    Dim cellvalue(20) As String
+    Private Sub btn_refresh_csv_Click(sender As Object, e As EventArgs) Handles btn_refresh_csv.Click
+        Dim streamReader As IO.StreamReader = New IO.StreamReader(My.Application.Info.DirectoryPath & "\Log\Log.csv")
+        Dim searchText As String = txtSearch.Text.Trim()
+        ' The search term from the textbox
+        Dim columnIndex As Integer = txt_coloumn_index.Text.Trim
+        ' Clear existing rows in the DataGridView before adding new ones
+        DataGridView2.Rows.Clear()
+        ' Reading CSV file content
+        While streamReader.Peek() <> -1
+            rowvalue = streamReader.ReadLine()
+            cellvalue = rowvalue.Split(","c)
+            ' Check if the cell value in the specified column contains the search text
+            If cellvalue(columnIndex).Contains(searchText) Then
+                DataGridView2.Rows.Add(cellvalue)
+            End If
+        End While
+        streamReader.Close()
     End Sub
 End Class

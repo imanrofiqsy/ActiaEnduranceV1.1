@@ -9,6 +9,7 @@
     Public Alarm As MachineAlarm
     Public Manual As ManualVar
     Public GeneralComm As GeneralCommunication
+    Public Logging As ProductionData
     Public UserLevel As Integer
     Public StateNumber As Integer
     Public measResult As String
@@ -29,7 +30,9 @@
         Dim PortKeith As String
 
         'Product
-        Dim Reference As String
+        Dim Reference_1 As String
+        Dim Reference_2 As String
+        Dim Reference_3 As String
         Dim StartTime As String
         Dim OperatorID As String
 
@@ -139,7 +142,26 @@
 
         'PLC To PC
         Dim trigVol As Integer
-        Dim trigCurr As Integer
+        Dim trigSaveCurr As Integer
 
+    End Structure
+
+    Public Structure ProductionData
+        Dim No As Integer
+        Dim Reference_1 As String
+        Dim Reference_2 As String
+        Dim Reference_3 As String
+        Dim StartDate As String
+        Dim OpeId As String
+        Dim Cavity As Integer
+        Dim CycleCount As Integer
+        Dim CurrentMode As String
+        Dim UseVoltage As String
+        Dim Voltage As String
+        Dim UseCurrent As String
+        Dim Current As String
+        Dim UseTime As String
+        Dim Time As String
+        Dim FinalResult As String
     End Structure
 End Module
