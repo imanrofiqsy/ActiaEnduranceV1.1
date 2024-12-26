@@ -466,6 +466,13 @@ Public Class frmMain
                                    TextBox5.Text = .Cur5
                                    TextBox6.Text = .Cur6
 
+                                   TextBox13.Text = Logging.CycleCount
+                                   TextBox14.Text = Logging.CycleCount
+                                   TextBox15.Text = Logging.CycleCount
+                                   TextBox16.Text = Logging.CycleCount
+                                   TextBox17.Text = Logging.CycleCount
+                                   TextBox18.Text = Logging.CycleCount
+
                                    txt_main_reference_1.Text = Logging.Reference_1
                                    txt_main_reference_2.Text = Logging.Reference_2
                                    txt_main_reference_3.Text = Logging.Reference_3
@@ -474,12 +481,11 @@ Public Class frmMain
                                End Sub)
                     End With
 
+                    Logging.CycleCount = ReadInteger(10021)
+
                     If GeneralComm.trigSaveCurr = 1 Then
                         Modbus.WriteInteger(10006, 0)
                         With Logging
-                            .CycleCount += 1
-
-                            Console.WriteLine(.CycleCount)
                             ' Path to the CSV file
                             Dim filePath As String = My.Application.Info.DirectoryPath & "\Log\Log.csv"
                             ' Create a StreamWriter to write to the file
@@ -741,17 +747,24 @@ Public Class frmMain
             txt_IP_keysight.Text = configData("KEYSIGHT")("IP")
             txt_Port_keysight.Text = configData("KEYSIGHT")("Port")
 
+            'txt_main_reference_1.Text = configData("Config")("Reference_1")
+            'txt_main_reference_2.Text = configData("Config")("Reference_2")
+            'txt_main_reference_3.Text = configData("Config")("Reference_3")
+            txt_cfg_date.Text = configData("Config")("StartTime")
+            'txt_main_date.Text = configData("Config")("StartTime")
+            txt_cfg_id.Text = configData("Config")("OpeName")
+            'txt_main_id.Text = configData("Config")("OpeName")
+
+            cb_cfg_ref_1.Text = configData("Config")("Reference_1")
+            cb_cfg_ref_2.Text = configData("Config")("Reference_2")
+            cb_cfg_ref_3.Text = configData("Config")("Reference_3")
+
             .Reference_1 = configData("Config")("Reference_1")
             .Reference_2 = configData("Config")("Reference_2")
             .Reference_3 = configData("Config")("Reference_3")
             .StartTime = configData("Config")("StartTime")
             .OperatorID = configData("Config")("OpeName")
 
-            cb_cfg_ref_1.Text = txt_main_reference_1.Text = .Reference_1
-            cb_cfg_ref_2.Text = txt_main_reference_2.Text = .Reference_2
-            cb_cfg_ref_3.Text = txt_main_reference_2.Text = .Reference_3
-            txt_cfg_date.Text = txt_main_date.Text = .StartTime
-            txt_cfg_id.Text = txt_main_id.Text = .OperatorID
             Logging.Reference_1 = .Reference_1
             Logging.Reference_2 = .Reference_2
             Logging.Reference_3 = .Reference_3
@@ -1146,7 +1159,7 @@ Public Class frmMain
         Filter.UseTime = "Disable"
     End Sub
 
-    Private Sub btn_search_Click(sender As Object, e As EventArgs) Handles btn_search.Click
+    Private Sub btn_search_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -1333,7 +1346,6 @@ Public Class frmMain
     Private Sub btn_run_MouseDown(sender As Object, e As MouseEventArgs) Handles btn_run.MouseDown
         GeneralComm.rdyStart = 1
         Logging.No += 1
-        Logging.CycleCount = 0
         configData("Config")("Count") = Logging.No
         parser.WriteFile(configPath, configData)
     End Sub
@@ -1343,11 +1355,39 @@ Public Class frmMain
     End Sub
     Dim rowvalue As String
     Dim cellvalue(20) As String
-    Private Sub btn_refresh_csv_Click(sender As Object, e As EventArgs) Handles btn_refresh_csv.Click
+    Dim columnIndex As Integer = 1
+    Private Sub btn_refresh_csv_Click(sender As Object, e As EventArgs) Handles btn_search.Click
         Dim streamReader As IO.StreamReader = New IO.StreamReader(My.Application.Info.DirectoryPath & "\Log\Log.csv")
-        Dim searchText As String = txtSearch.Text.Trim()
+        Dim searchCurrentMode As String = ""
+        Dim searchVoltage As String = ""
+        Dim searchCurrent As String = ""
+        Dim searchTime As String = ""
+
+        If current_mode_ac.Checked = True Then
+            searchCurrentMode = "AC"
+        ElseIf current_mode_dc.Checked = True Then
+            searchCurrentMode = "DC"
+        End If
+
+        If use_vol_yes.Checked = True Then
+            searchVoltage = "Use Voltage"
+        ElseIf use_vol_no.Checked = True Then
+            searchVoltage = "Skip Voltage"
+        End If
+
+        If use_curr_yes.Checked = True Then
+            searchCurrent = "Use Current"
+        ElseIf use_curr_no.Checked = True Then
+            searchCurrent = "Skip Current"
+        End If
+
+        If use_time_yes.Checked = True Then
+            searchTime = "Use Time"
+        ElseIf use_time_no.Checked = True Then
+            searchTime = "Skip Time"
+        End If
         ' The search term from the textbox
-        Dim columnIndex As Integer = txt_coloumn_index.Text.Trim
+        'columnIndex = txt_coloumn_index.Text.Trim
         ' Clear existing rows in the DataGridView before adding new ones
         DataGridView2.Rows.Clear()
         ' Reading CSV file content
@@ -1355,10 +1395,86 @@ Public Class frmMain
             rowvalue = streamReader.ReadLine()
             cellvalue = rowvalue.Split(","c)
             ' Check if the cell value in the specified column contains the search text
-            If cellvalue(columnIndex).Contains(searchText) Then
+            If current_mode_ac.Checked = True Or current_mode_dc.Checked = True Then
+                If cellvalue(6).Contains(searchCurrentMode) Then
+                    If use_vol_yes.Checked = True Or use_vol_no.Checked = True Then
+                        If cellvalue(7).Contains(searchVoltage) Then
+                            If use_curr_yes.Checked = True Or use_curr_no.Checked = True Then
+                                If cellvalue(9).Contains(searchCurrent) Then
+                                    If use_time_yes.Checked = True Or use_time_no.Checked = True Then
+                                        DataGridView2.Rows.Add(cellvalue)
+                                    Else
+                                        DataGridView2.Rows.Add(cellvalue)
+                                    End If
+                                End If
+                            Else
+                                DataGridView2.Rows.Add(cellvalue)
+                            End If
+                        End If
+                    Else
+                        DataGridView2.Rows.Add(cellvalue)
+                    End If
+                End If
+            Else
                 DataGridView2.Rows.Add(cellvalue)
             End If
         End While
         streamReader.Close()
+    End Sub
+
+    Dim _SaveFileDialog As New SaveFileDialog
+    Private Sub btn_select_Click(sender As Object, e As EventArgs) Handles btn_select.Click
+        _SaveFileDialog.Filter = "CSV Files|*.csv"
+        _SaveFileDialog.Title = "Export-csv"
+        If _SaveFileDialog.ShowDialog = DialogResult.OK Then
+            txt_file_location.Text = _SaveFileDialog.FileName
+        End If
+    End Sub
+
+    Private Sub btn_export_Click(sender As Object, e As EventArgs) Handles btn_export.Click
+        If txt_file_location.Text <> "" Then
+            If DataGridView2.RowCount > 0 Then
+                Dim value As String = ""
+                Dim dr As New DataGridViewRow()
+
+                Dim swOut As StreamWriter = File.CreateText(_SaveFileDialog.FileName)
+
+                'write header rows to csv
+                For i As Integer = 0 To DataGridView2.Columns.Count - 1
+                    If i > 0 Then
+                        swOut.Write(",")
+                    End If
+                    swOut.Write(DataGridView2.Columns(i).HeaderText)
+                Next
+
+                swOut.WriteLine()
+
+                'write DataGridView rows to csv
+                ProgressBarExport.Minimum = 0
+                ProgressBarExport.Maximum = DataGridView2.Rows.Count - 1
+                For j As Integer = 0 To DataGridView2.Rows.Count - 1
+                    If j > 0 Then
+                        swOut.WriteLine()
+                    End If
+
+                    dr = DataGridView2.Rows(j)
+
+                    For i As Integer = 0 To DataGridView2.Columns.Count - 1
+                        If i > 0 Then
+                            swOut.Write(",")
+                        End If
+                        If IsDBNull(dr.Cells(i).Value) Then
+                            value = "0"
+                        Else
+                            value = CStr(dr.Cells(i).Value)
+                        End If
+                        swOut.Write(value)
+                    Next
+                    ProgressBarExport.Value = j
+                Next
+
+                swOut.Close()
+            End If
+        End If
     End Sub
 End Class

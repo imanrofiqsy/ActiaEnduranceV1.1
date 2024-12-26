@@ -36,6 +36,8 @@ Partial Class frmMain
         Me.Label32 = New System.Windows.Forms.Label()
         Me.txt_main_id = New System.Windows.Forms.TextBox()
         Me.txt_main_date = New System.Windows.Forms.TextBox()
+        Me.txt_main_reference_2 = New System.Windows.Forms.TextBox()
+        Me.txt_main_reference_3 = New System.Windows.Forms.TextBox()
         Me.txt_main_reference_1 = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.TextBox30 = New System.Windows.Forms.TextBox()
@@ -105,6 +107,9 @@ Partial Class frmMain
         Me.ind_cav2 = New System.Windows.Forms.PictureBox()
         Me.ind_cav1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.cb_cfg_ref_3 = New System.Windows.Forms.ComboBox()
+        Me.cb_cfg_ref_2 = New System.Windows.Forms.ComboBox()
+        Me.cb_cfg_ref_1 = New System.Windows.Forms.ComboBox()
         Me.btn_save_config = New System.Windows.Forms.Button()
         Me.cb_cfg_use_cav6 = New System.Windows.Forms.ComboBox()
         Me.cb_cfg_use_cav5 = New System.Windows.Forms.ComboBox()
@@ -140,6 +145,9 @@ Partial Class frmMain
         Me.txt_cfg_id = New System.Windows.Forms.TextBox()
         Me.txt_cfg_nbc = New System.Windows.Forms.TextBox()
         Me.txt_cfg_date = New System.Windows.Forms.TextBox()
+        Me.TextBox39 = New System.Windows.Forms.TextBox()
+        Me.TextBox26 = New System.Windows.Forms.TextBox()
+        Me.TextBox25 = New System.Windows.Forms.TextBox()
         Me.Manual = New System.Windows.Forms.TabPage()
         Me.secureLvlMan = New System.Windows.Forms.Label()
         Me.gb_meas1 = New System.Windows.Forms.GroupBox()
@@ -235,19 +243,6 @@ Partial Class frmMain
         Me.DatalogSQLTab = New System.Windows.Forms.TabPage()
         Me.btn_clear_search = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.btn_search = New System.Windows.Forms.Button()
-        Me.use_time_no = New System.Windows.Forms.CheckBox()
-        Me.use_time_yes = New System.Windows.Forms.CheckBox()
-        Me.use_curr_no = New System.Windows.Forms.CheckBox()
-        Me.use_curr_yes = New System.Windows.Forms.CheckBox()
-        Me.use_vol_no = New System.Windows.Forms.CheckBox()
-        Me.use_vol_yes = New System.Windows.Forms.CheckBox()
-        Me.current_mode_dc = New System.Windows.Forms.CheckBox()
-        Me.current_mode_ac = New System.Windows.Forms.CheckBox()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.Label61 = New System.Windows.Forms.Label()
         Me.SettingTab = New System.Windows.Forms.TabPage()
         Me.secureLvlSet = New System.Windows.Forms.Label()
         Me.btn_save_setting = New System.Windows.Forms.Button()
@@ -338,9 +333,12 @@ Partial Class frmMain
         Me.TextBox45 = New System.Windows.Forms.TextBox()
         Me.TextBox46 = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.txt_coloumn_index = New System.Windows.Forms.TextBox()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btn_refresh_csv = New System.Windows.Forms.Button()
+        Me.GroupBox34 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBarExport = New System.Windows.Forms.ProgressBar()
+        Me.txt_file_location = New System.Windows.Forms.TextBox()
+        Me.btn_export = New System.Windows.Forms.Button()
+        Me.btn_select = New System.Windows.Forms.Button()
+        Me.GroupBox33 = New System.Windows.Forms.GroupBox()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.ColumnNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnData = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -358,14 +356,19 @@ Partial Class frmMain
         Me.ColumnFinalResult = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_alarm = New System.Windows.Forms.Label()
         Me.lbl_user = New System.Windows.Forms.Label()
-        Me.TextBox25 = New System.Windows.Forms.TextBox()
-        Me.TextBox26 = New System.Windows.Forms.TextBox()
-        Me.TextBox39 = New System.Windows.Forms.TextBox()
-        Me.cb_cfg_ref_1 = New System.Windows.Forms.ComboBox()
-        Me.cb_cfg_ref_2 = New System.Windows.Forms.ComboBox()
-        Me.cb_cfg_ref_3 = New System.Windows.Forms.ComboBox()
-        Me.txt_main_reference_3 = New System.Windows.Forms.TextBox()
-        Me.txt_main_reference_2 = New System.Windows.Forms.TextBox()
+        Me.use_time_no = New System.Windows.Forms.CheckBox()
+        Me.use_time_yes = New System.Windows.Forms.CheckBox()
+        Me.use_curr_no = New System.Windows.Forms.CheckBox()
+        Me.use_curr_yes = New System.Windows.Forms.CheckBox()
+        Me.use_vol_no = New System.Windows.Forms.CheckBox()
+        Me.use_vol_yes = New System.Windows.Forms.CheckBox()
+        Me.current_mode_dc = New System.Windows.Forms.CheckBox()
+        Me.current_mode_ac = New System.Windows.Forms.CheckBox()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.btn_search = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tab.SuspendLayout()
         Me.MainTab.SuspendLayout()
@@ -438,6 +441,8 @@ Partial Class frmMain
         Me.GroupBox11.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GroupBox34.SuspendLayout()
+        Me.GroupBox33.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -599,6 +604,24 @@ Partial Class frmMain
         Me.txt_main_date.ReadOnly = True
         Me.txt_main_date.Size = New System.Drawing.Size(168, 29)
         Me.txt_main_date.TabIndex = 3
+        '
+        'txt_main_reference_2
+        '
+        Me.txt_main_reference_2.Location = New System.Drawing.Point(203, 36)
+        Me.txt_main_reference_2.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_main_reference_2.Name = "txt_main_reference_2"
+        Me.txt_main_reference_2.ReadOnly = True
+        Me.txt_main_reference_2.Size = New System.Drawing.Size(51, 29)
+        Me.txt_main_reference_2.TabIndex = 4
+        '
+        'txt_main_reference_3
+        '
+        Me.txt_main_reference_3.Location = New System.Drawing.Point(261, 36)
+        Me.txt_main_reference_3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_main_reference_3.Name = "txt_main_reference_3"
+        Me.txt_main_reference_3.ReadOnly = True
+        Me.txt_main_reference_3.Size = New System.Drawing.Size(51, 29)
+        Me.txt_main_reference_3.TabIndex = 4
         '
         'txt_main_reference_1
         '
@@ -1426,6 +1449,33 @@ Partial Class frmMain
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Product Reference"
         '
+        'cb_cfg_ref_3
+        '
+        Me.cb_cfg_ref_3.FormattingEnabled = True
+        Me.cb_cfg_ref_3.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
+        Me.cb_cfg_ref_3.Location = New System.Drawing.Point(235, 70)
+        Me.cb_cfg_ref_3.Name = "cb_cfg_ref_3"
+        Me.cb_cfg_ref_3.Size = New System.Drawing.Size(52, 29)
+        Me.cb_cfg_ref_3.TabIndex = 10
+        '
+        'cb_cfg_ref_2
+        '
+        Me.cb_cfg_ref_2.FormattingEnabled = True
+        Me.cb_cfg_ref_2.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
+        Me.cb_cfg_ref_2.Location = New System.Drawing.Point(177, 70)
+        Me.cb_cfg_ref_2.Name = "cb_cfg_ref_2"
+        Me.cb_cfg_ref_2.Size = New System.Drawing.Size(52, 29)
+        Me.cb_cfg_ref_2.TabIndex = 10
+        '
+        'cb_cfg_ref_1
+        '
+        Me.cb_cfg_ref_1.FormattingEnabled = True
+        Me.cb_cfg_ref_1.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
+        Me.cb_cfg_ref_1.Location = New System.Drawing.Point(119, 70)
+        Me.cb_cfg_ref_1.Name = "cb_cfg_ref_1"
+        Me.cb_cfg_ref_1.Size = New System.Drawing.Size(52, 29)
+        Me.cb_cfg_ref_1.TabIndex = 10
+        '
         'btn_save_config
         '
         Me.btn_save_config.BackColor = System.Drawing.Color.White
@@ -1757,6 +1807,42 @@ Partial Class frmMain
         Me.txt_cfg_date.Name = "txt_cfg_date"
         Me.txt_cfg_date.Size = New System.Drawing.Size(168, 29)
         Me.txt_cfg_date.TabIndex = 0
+        '
+        'TextBox39
+        '
+        Me.TextBox39.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox39.Location = New System.Drawing.Point(177, 38)
+        Me.TextBox39.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox39.Name = "TextBox39"
+        Me.TextBox39.ReadOnly = True
+        Me.TextBox39.Size = New System.Drawing.Size(52, 25)
+        Me.TextBox39.TabIndex = 0
+        Me.TextBox39.Text = "CAV 3-4"
+        Me.TextBox39.WordWrap = False
+        '
+        'TextBox26
+        '
+        Me.TextBox26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox26.Location = New System.Drawing.Point(235, 38)
+        Me.TextBox26.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox26.Name = "TextBox26"
+        Me.TextBox26.ReadOnly = True
+        Me.TextBox26.Size = New System.Drawing.Size(52, 25)
+        Me.TextBox26.TabIndex = 0
+        Me.TextBox26.Text = "CAV 5-6"
+        Me.TextBox26.WordWrap = False
+        '
+        'TextBox25
+        '
+        Me.TextBox25.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox25.Location = New System.Drawing.Point(119, 38)
+        Me.TextBox25.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox25.Name = "TextBox25"
+        Me.TextBox25.ReadOnly = True
+        Me.TextBox25.Size = New System.Drawing.Size(52, 25)
+        Me.TextBox25.TabIndex = 0
+        Me.TextBox25.Text = "CAV 1-2"
+        Me.TextBox25.WordWrap = False
         '
         'Manual
         '
@@ -2724,19 +2810,6 @@ Partial Class frmMain
         '
         Me.DatalogSQLTab.Controls.Add(Me.btn_clear_search)
         Me.DatalogSQLTab.Controls.Add(Me.DataGridView1)
-        Me.DatalogSQLTab.Controls.Add(Me.btn_search)
-        Me.DatalogSQLTab.Controls.Add(Me.use_time_no)
-        Me.DatalogSQLTab.Controls.Add(Me.use_time_yes)
-        Me.DatalogSQLTab.Controls.Add(Me.use_curr_no)
-        Me.DatalogSQLTab.Controls.Add(Me.use_curr_yes)
-        Me.DatalogSQLTab.Controls.Add(Me.use_vol_no)
-        Me.DatalogSQLTab.Controls.Add(Me.use_vol_yes)
-        Me.DatalogSQLTab.Controls.Add(Me.current_mode_dc)
-        Me.DatalogSQLTab.Controls.Add(Me.current_mode_ac)
-        Me.DatalogSQLTab.Controls.Add(Me.Label58)
-        Me.DatalogSQLTab.Controls.Add(Me.Label59)
-        Me.DatalogSQLTab.Controls.Add(Me.Label60)
-        Me.DatalogSQLTab.Controls.Add(Me.Label61)
         Me.DatalogSQLTab.Location = New System.Drawing.Point(4, 30)
         Me.DatalogSQLTab.Name = "DatalogSQLTab"
         Me.DatalogSQLTab.Size = New System.Drawing.Size(974, 566)
@@ -2765,142 +2838,6 @@ Partial Class frmMain
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(968, 365)
         Me.DataGridView1.TabIndex = 35
-        '
-        'btn_search
-        '
-        Me.btn_search.BackColor = System.Drawing.Color.White
-        Me.btn_search.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_search.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_search.Image = CType(resources.GetObject("btn_search.Image"), System.Drawing.Image)
-        Me.btn_search.Location = New System.Drawing.Point(324, 374)
-        Me.btn_search.Name = "btn_search"
-        Me.btn_search.Size = New System.Drawing.Size(80, 84)
-        Me.btn_search.TabIndex = 34
-        Me.btn_search.Text = "  Search"
-        Me.btn_search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.btn_search.UseVisualStyleBackColor = False
-        '
-        'use_time_no
-        '
-        Me.use_time_no.AutoSize = True
-        Me.use_time_no.Location = New System.Drawing.Point(254, 518)
-        Me.use_time_no.Name = "use_time_no"
-        Me.use_time_no.Size = New System.Drawing.Size(53, 25)
-        Me.use_time_no.TabIndex = 33
-        Me.use_time_no.Text = "NO"
-        Me.use_time_no.UseVisualStyleBackColor = True
-        '
-        'use_time_yes
-        '
-        Me.use_time_yes.AutoSize = True
-        Me.use_time_yes.Location = New System.Drawing.Point(196, 518)
-        Me.use_time_yes.Name = "use_time_yes"
-        Me.use_time_yes.Size = New System.Drawing.Size(55, 25)
-        Me.use_time_yes.TabIndex = 32
-        Me.use_time_yes.Text = "YES"
-        Me.use_time_yes.UseVisualStyleBackColor = True
-        '
-        'use_curr_no
-        '
-        Me.use_curr_no.AutoSize = True
-        Me.use_curr_no.Location = New System.Drawing.Point(254, 466)
-        Me.use_curr_no.Name = "use_curr_no"
-        Me.use_curr_no.Size = New System.Drawing.Size(53, 25)
-        Me.use_curr_no.TabIndex = 31
-        Me.use_curr_no.Text = "NO"
-        Me.use_curr_no.UseVisualStyleBackColor = True
-        '
-        'use_curr_yes
-        '
-        Me.use_curr_yes.AutoSize = True
-        Me.use_curr_yes.Location = New System.Drawing.Point(196, 466)
-        Me.use_curr_yes.Name = "use_curr_yes"
-        Me.use_curr_yes.Size = New System.Drawing.Size(55, 25)
-        Me.use_curr_yes.TabIndex = 30
-        Me.use_curr_yes.Text = "YES"
-        Me.use_curr_yes.UseVisualStyleBackColor = True
-        '
-        'use_vol_no
-        '
-        Me.use_vol_no.AutoSize = True
-        Me.use_vol_no.Location = New System.Drawing.Point(254, 415)
-        Me.use_vol_no.Name = "use_vol_no"
-        Me.use_vol_no.Size = New System.Drawing.Size(53, 25)
-        Me.use_vol_no.TabIndex = 29
-        Me.use_vol_no.Text = "NO"
-        Me.use_vol_no.UseVisualStyleBackColor = True
-        '
-        'use_vol_yes
-        '
-        Me.use_vol_yes.AutoSize = True
-        Me.use_vol_yes.Location = New System.Drawing.Point(196, 415)
-        Me.use_vol_yes.Name = "use_vol_yes"
-        Me.use_vol_yes.Size = New System.Drawing.Size(55, 25)
-        Me.use_vol_yes.TabIndex = 28
-        Me.use_vol_yes.Text = "YES"
-        Me.use_vol_yes.UseVisualStyleBackColor = True
-        '
-        'current_mode_dc
-        '
-        Me.current_mode_dc.AutoSize = True
-        Me.current_mode_dc.Location = New System.Drawing.Point(254, 374)
-        Me.current_mode_dc.Name = "current_mode_dc"
-        Me.current_mode_dc.Size = New System.Drawing.Size(50, 25)
-        Me.current_mode_dc.TabIndex = 27
-        Me.current_mode_dc.Text = "DC"
-        Me.current_mode_dc.UseVisualStyleBackColor = True
-        '
-        'current_mode_ac
-        '
-        Me.current_mode_ac.AutoSize = True
-        Me.current_mode_ac.Location = New System.Drawing.Point(196, 374)
-        Me.current_mode_ac.Name = "current_mode_ac"
-        Me.current_mode_ac.Size = New System.Drawing.Size(49, 25)
-        Me.current_mode_ac.TabIndex = 26
-        Me.current_mode_ac.Text = "AC"
-        Me.current_mode_ac.UseVisualStyleBackColor = True
-        '
-        'Label58
-        '
-        Me.Label58.AutoSize = True
-        Me.Label58.Location = New System.Drawing.Point(79, 506)
-        Me.Label58.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(101, 42)
-        Me.Label58.TabIndex = 14
-        Me.Label58.Text = "Release Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Control"
-        Me.Label58.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label59
-        '
-        Me.Label59.AutoSize = True
-        Me.Label59.Location = New System.Drawing.Point(19, 454)
-        Me.Label59.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(161, 42)
-        Me.Label59.TabIndex = 15
-        Me.Label59.Text = "Current Consumption" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Control"
-        Me.Label59.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label60
-        '
-        Me.Label60.AutoSize = True
-        Me.Label60.Location = New System.Drawing.Point(73, 374)
-        Me.Label60.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(107, 21)
-        Me.Label60.TabIndex = 16
-        Me.Label60.Text = "Current Mode"
-        '
-        'Label61
-        '
-        Me.Label61.AutoSize = True
-        Me.Label61.Location = New System.Drawing.Point(118, 405)
-        Me.Label61.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(62, 42)
-        Me.Label61.TabIndex = 17
-        Me.Label61.Text = "Voltage" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Control"
         '
         'SettingTab
         '
@@ -3804,9 +3741,8 @@ Partial Class frmMain
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.txt_coloumn_index)
-        Me.TabPage1.Controls.Add(Me.txtSearch)
-        Me.TabPage1.Controls.Add(Me.btn_refresh_csv)
+        Me.TabPage1.Controls.Add(Me.GroupBox34)
+        Me.TabPage1.Controls.Add(Me.GroupBox33)
         Me.TabPage1.Controls.Add(Me.DataGridView2)
         Me.TabPage1.Location = New System.Drawing.Point(4, 30)
         Me.TabPage1.Name = "TabPage1"
@@ -3815,28 +3751,72 @@ Partial Class frmMain
         Me.TabPage1.Text = "CSVDatalog"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'txt_coloumn_index
+        'GroupBox34
         '
-        Me.txt_coloumn_index.Location = New System.Drawing.Point(155, 429)
-        Me.txt_coloumn_index.Name = "txt_coloumn_index"
-        Me.txt_coloumn_index.Size = New System.Drawing.Size(100, 29)
-        Me.txt_coloumn_index.TabIndex = 39
+        Me.GroupBox34.Controls.Add(Me.ProgressBarExport)
+        Me.GroupBox34.Controls.Add(Me.txt_file_location)
+        Me.GroupBox34.Controls.Add(Me.btn_export)
+        Me.GroupBox34.Controls.Add(Me.btn_select)
+        Me.GroupBox34.Location = New System.Drawing.Point(723, 385)
+        Me.GroupBox34.Name = "GroupBox34"
+        Me.GroupBox34.Size = New System.Drawing.Size(248, 163)
+        Me.GroupBox34.TabIndex = 41
+        Me.GroupBox34.TabStop = False
+        Me.GroupBox34.Text = "Export File Location"
         '
-        'txtSearch
+        'ProgressBarExport
         '
-        Me.txtSearch.Location = New System.Drawing.Point(18, 429)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(100, 29)
-        Me.txtSearch.TabIndex = 38
+        Me.ProgressBarExport.Location = New System.Drawing.Point(6, 79)
+        Me.ProgressBarExport.Name = "ProgressBarExport"
+        Me.ProgressBarExport.Size = New System.Drawing.Size(236, 23)
+        Me.ProgressBarExport.TabIndex = 2
         '
-        'btn_refresh_csv
+        'txt_file_location
         '
-        Me.btn_refresh_csv.Location = New System.Drawing.Point(18, 475)
-        Me.btn_refresh_csv.Name = "btn_refresh_csv"
-        Me.btn_refresh_csv.Size = New System.Drawing.Size(75, 72)
-        Me.btn_refresh_csv.TabIndex = 37
-        Me.btn_refresh_csv.Text = "Search"
-        Me.btn_refresh_csv.UseVisualStyleBackColor = True
+        Me.txt_file_location.Location = New System.Drawing.Point(6, 44)
+        Me.txt_file_location.Name = "txt_file_location"
+        Me.txt_file_location.Size = New System.Drawing.Size(236, 29)
+        Me.txt_file_location.TabIndex = 1
+        '
+        'btn_export
+        '
+        Me.btn_export.Location = New System.Drawing.Point(150, 118)
+        Me.btn_export.Name = "btn_export"
+        Me.btn_export.Size = New System.Drawing.Size(92, 29)
+        Me.btn_export.TabIndex = 37
+        Me.btn_export.Text = "Export"
+        Me.btn_export.UseVisualStyleBackColor = True
+        '
+        'btn_select
+        '
+        Me.btn_select.Location = New System.Drawing.Point(6, 118)
+        Me.btn_select.Name = "btn_select"
+        Me.btn_select.Size = New System.Drawing.Size(92, 29)
+        Me.btn_select.TabIndex = 37
+        Me.btn_select.Text = "Select"
+        Me.btn_select.UseVisualStyleBackColor = True
+        '
+        'GroupBox33
+        '
+        Me.GroupBox33.Controls.Add(Me.btn_search)
+        Me.GroupBox33.Controls.Add(Me.use_time_no)
+        Me.GroupBox33.Controls.Add(Me.use_time_yes)
+        Me.GroupBox33.Controls.Add(Me.use_curr_no)
+        Me.GroupBox33.Controls.Add(Me.use_curr_yes)
+        Me.GroupBox33.Controls.Add(Me.use_vol_no)
+        Me.GroupBox33.Controls.Add(Me.use_vol_yes)
+        Me.GroupBox33.Controls.Add(Me.current_mode_dc)
+        Me.GroupBox33.Controls.Add(Me.current_mode_ac)
+        Me.GroupBox33.Controls.Add(Me.Label58)
+        Me.GroupBox33.Controls.Add(Me.Label59)
+        Me.GroupBox33.Controls.Add(Me.Label60)
+        Me.GroupBox33.Controls.Add(Me.Label61)
+        Me.GroupBox33.Location = New System.Drawing.Point(9, 385)
+        Me.GroupBox33.Name = "GroupBox33"
+        Me.GroupBox33.Size = New System.Drawing.Size(708, 163)
+        Me.GroupBox33.TabIndex = 40
+        Me.GroupBox33.TabStop = False
+        Me.GroupBox33.Text = "Datalog Finder"
         '
         'DataGridView2
         '
@@ -3953,86 +3933,141 @@ Partial Class frmMain
         Me.lbl_user.Text = "OPE"
         Me.lbl_user.Visible = False
         '
-        'TextBox25
+        'use_time_no
         '
-        Me.TextBox25.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox25.Location = New System.Drawing.Point(119, 38)
-        Me.TextBox25.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox25.Name = "TextBox25"
-        Me.TextBox25.ReadOnly = True
-        Me.TextBox25.Size = New System.Drawing.Size(52, 25)
-        Me.TextBox25.TabIndex = 0
-        Me.TextBox25.Text = "CAV 1-2"
-        Me.TextBox25.WordWrap = False
+        Me.use_time_no.AutoSize = True
+        Me.use_time_no.Location = New System.Drawing.Point(510, 83)
+        Me.use_time_no.Name = "use_time_no"
+        Me.use_time_no.Size = New System.Drawing.Size(53, 25)
+        Me.use_time_no.TabIndex = 45
+        Me.use_time_no.Text = "NO"
+        Me.use_time_no.UseVisualStyleBackColor = True
         '
-        'TextBox26
+        'use_time_yes
         '
-        Me.TextBox26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox26.Location = New System.Drawing.Point(235, 38)
-        Me.TextBox26.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox26.Name = "TextBox26"
-        Me.TextBox26.ReadOnly = True
-        Me.TextBox26.Size = New System.Drawing.Size(52, 25)
-        Me.TextBox26.TabIndex = 0
-        Me.TextBox26.Text = "CAV 5-6"
-        Me.TextBox26.WordWrap = False
+        Me.use_time_yes.AutoSize = True
+        Me.use_time_yes.Location = New System.Drawing.Point(452, 83)
+        Me.use_time_yes.Name = "use_time_yes"
+        Me.use_time_yes.Size = New System.Drawing.Size(55, 25)
+        Me.use_time_yes.TabIndex = 44
+        Me.use_time_yes.Text = "YES"
+        Me.use_time_yes.UseVisualStyleBackColor = True
         '
-        'TextBox39
+        'use_curr_no
         '
-        Me.TextBox39.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox39.Location = New System.Drawing.Point(177, 38)
-        Me.TextBox39.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox39.Name = "TextBox39"
-        Me.TextBox39.ReadOnly = True
-        Me.TextBox39.Size = New System.Drawing.Size(52, 25)
-        Me.TextBox39.TabIndex = 0
-        Me.TextBox39.Text = "CAV 3-4"
-        Me.TextBox39.WordWrap = False
+        Me.use_curr_no.AutoSize = True
+        Me.use_curr_no.Location = New System.Drawing.Point(510, 31)
+        Me.use_curr_no.Name = "use_curr_no"
+        Me.use_curr_no.Size = New System.Drawing.Size(53, 25)
+        Me.use_curr_no.TabIndex = 43
+        Me.use_curr_no.Text = "NO"
+        Me.use_curr_no.UseVisualStyleBackColor = True
         '
-        'cb_cfg_ref_1
+        'use_curr_yes
         '
-        Me.cb_cfg_ref_1.FormattingEnabled = True
-        Me.cb_cfg_ref_1.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
-        Me.cb_cfg_ref_1.Location = New System.Drawing.Point(119, 70)
-        Me.cb_cfg_ref_1.Name = "cb_cfg_ref_1"
-        Me.cb_cfg_ref_1.Size = New System.Drawing.Size(52, 29)
-        Me.cb_cfg_ref_1.TabIndex = 10
+        Me.use_curr_yes.AutoSize = True
+        Me.use_curr_yes.Location = New System.Drawing.Point(452, 31)
+        Me.use_curr_yes.Name = "use_curr_yes"
+        Me.use_curr_yes.Size = New System.Drawing.Size(55, 25)
+        Me.use_curr_yes.TabIndex = 42
+        Me.use_curr_yes.Text = "YES"
+        Me.use_curr_yes.UseVisualStyleBackColor = True
         '
-        'cb_cfg_ref_2
+        'use_vol_no
         '
-        Me.cb_cfg_ref_2.FormattingEnabled = True
-        Me.cb_cfg_ref_2.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
-        Me.cb_cfg_ref_2.Location = New System.Drawing.Point(177, 70)
-        Me.cb_cfg_ref_2.Name = "cb_cfg_ref_2"
-        Me.cb_cfg_ref_2.Size = New System.Drawing.Size(52, 29)
-        Me.cb_cfg_ref_2.TabIndex = 10
+        Me.use_vol_no.AutoSize = True
+        Me.use_vol_no.Location = New System.Drawing.Point(198, 72)
+        Me.use_vol_no.Name = "use_vol_no"
+        Me.use_vol_no.Size = New System.Drawing.Size(53, 25)
+        Me.use_vol_no.TabIndex = 41
+        Me.use_vol_no.Text = "NO"
+        Me.use_vol_no.UseVisualStyleBackColor = True
         '
-        'cb_cfg_ref_3
+        'use_vol_yes
         '
-        Me.cb_cfg_ref_3.FormattingEnabled = True
-        Me.cb_cfg_ref_3.Items.AddRange(New Object() {"N/A", "AA", "BB", "CC"})
-        Me.cb_cfg_ref_3.Location = New System.Drawing.Point(235, 70)
-        Me.cb_cfg_ref_3.Name = "cb_cfg_ref_3"
-        Me.cb_cfg_ref_3.Size = New System.Drawing.Size(52, 29)
-        Me.cb_cfg_ref_3.TabIndex = 10
+        Me.use_vol_yes.AutoSize = True
+        Me.use_vol_yes.Location = New System.Drawing.Point(140, 72)
+        Me.use_vol_yes.Name = "use_vol_yes"
+        Me.use_vol_yes.Size = New System.Drawing.Size(55, 25)
+        Me.use_vol_yes.TabIndex = 40
+        Me.use_vol_yes.Text = "YES"
+        Me.use_vol_yes.UseVisualStyleBackColor = True
         '
-        'txt_main_reference_3
+        'current_mode_dc
         '
-        Me.txt_main_reference_3.Location = New System.Drawing.Point(261, 36)
-        Me.txt_main_reference_3.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_main_reference_3.Name = "txt_main_reference_3"
-        Me.txt_main_reference_3.ReadOnly = True
-        Me.txt_main_reference_3.Size = New System.Drawing.Size(51, 29)
-        Me.txt_main_reference_3.TabIndex = 4
+        Me.current_mode_dc.AutoSize = True
+        Me.current_mode_dc.Location = New System.Drawing.Point(198, 31)
+        Me.current_mode_dc.Name = "current_mode_dc"
+        Me.current_mode_dc.Size = New System.Drawing.Size(50, 25)
+        Me.current_mode_dc.TabIndex = 39
+        Me.current_mode_dc.Text = "DC"
+        Me.current_mode_dc.UseVisualStyleBackColor = True
         '
-        'txt_main_reference_2
+        'current_mode_ac
         '
-        Me.txt_main_reference_2.Location = New System.Drawing.Point(203, 36)
-        Me.txt_main_reference_2.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_main_reference_2.Name = "txt_main_reference_2"
-        Me.txt_main_reference_2.ReadOnly = True
-        Me.txt_main_reference_2.Size = New System.Drawing.Size(51, 29)
-        Me.txt_main_reference_2.TabIndex = 4
+        Me.current_mode_ac.AutoSize = True
+        Me.current_mode_ac.Location = New System.Drawing.Point(140, 31)
+        Me.current_mode_ac.Name = "current_mode_ac"
+        Me.current_mode_ac.Size = New System.Drawing.Size(49, 25)
+        Me.current_mode_ac.TabIndex = 38
+        Me.current_mode_ac.Text = "AC"
+        Me.current_mode_ac.UseVisualStyleBackColor = True
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(335, 71)
+        Me.Label58.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(101, 42)
+        Me.Label58.TabIndex = 34
+        Me.Label58.Text = "Release Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Control"
+        Me.Label58.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Location = New System.Drawing.Point(275, 19)
+        Me.Label59.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(161, 42)
+        Me.Label59.TabIndex = 35
+        Me.Label59.Text = "Current Consumption" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Control"
+        Me.Label59.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Location = New System.Drawing.Point(17, 31)
+        Me.Label60.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(107, 21)
+        Me.Label60.TabIndex = 36
+        Me.Label60.Text = "Current Mode"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Location = New System.Drawing.Point(62, 62)
+        Me.Label61.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(62, 42)
+        Me.Label61.TabIndex = 37
+        Me.Label61.Text = "Voltage" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Control"
+        '
+        'btn_search
+        '
+        Me.btn_search.BackColor = System.Drawing.Color.White
+        Me.btn_search.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_search.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_search.Image = CType(resources.GetObject("btn_search.Image"), System.Drawing.Image)
+        Me.btn_search.Location = New System.Drawing.Point(601, 31)
+        Me.btn_search.Name = "btn_search"
+        Me.btn_search.Size = New System.Drawing.Size(80, 84)
+        Me.btn_search.TabIndex = 46
+        Me.btn_search.Text = "  Search"
+        Me.btn_search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.btn_search.UseVisualStyleBackColor = False
         '
         'frmMain
         '
@@ -4119,7 +4154,6 @@ Partial Class frmMain
         CType(Me.ind_fdut2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ind_fdut1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DatalogSQLTab.ResumeLayout(False)
-        Me.DatalogSQLTab.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SettingTab.ResumeLayout(False)
         Me.GroupBox22.ResumeLayout(False)
@@ -4144,7 +4178,10 @@ Partial Class frmMain
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
+        Me.GroupBox34.ResumeLayout(False)
+        Me.GroupBox34.PerformLayout()
+        Me.GroupBox33.ResumeLayout(False)
+        Me.GroupBox33.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -4320,19 +4357,6 @@ Partial Class frmMain
     Friend WithEvents txt_cfg_c_val As TextBox
     Friend WithEvents DatalogSQLTab As TabPage
     Friend WithEvents btn_save_config As Button
-    Friend WithEvents Label58 As Label
-    Friend WithEvents Label59 As Label
-    Friend WithEvents Label60 As Label
-    Friend WithEvents Label61 As Label
-    Friend WithEvents use_time_no As CheckBox
-    Friend WithEvents use_time_yes As CheckBox
-    Friend WithEvents use_curr_no As CheckBox
-    Friend WithEvents use_curr_yes As CheckBox
-    Friend WithEvents use_vol_no As CheckBox
-    Friend WithEvents use_vol_yes As CheckBox
-    Friend WithEvents current_mode_dc As CheckBox
-    Friend WithEvents current_mode_ac As CheckBox
-    Friend WithEvents btn_search As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btn_clear_search As Button
     Friend WithEvents txt_alarm As Label
@@ -4474,7 +4498,6 @@ Partial Class frmMain
     Friend WithEvents ind_fdut2 As PictureBox
     Friend WithEvents ind_fdut1 As PictureBox
     Friend WithEvents manualTrig As Button
-    Friend WithEvents btn_refresh_csv As Button
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents ColumnNo As DataGridViewTextBoxColumn
     Friend WithEvents ColumnData As DataGridViewTextBoxColumn
@@ -4490,8 +4513,6 @@ Partial Class frmMain
     Friend WithEvents ColumnTimeCtrl As DataGridViewTextBoxColumn
     Friend WithEvents ColumnTimeCount As DataGridViewTextBoxColumn
     Friend WithEvents ColumnFinalResult As DataGridViewTextBoxColumn
-    Friend WithEvents txtSearch As TextBox
-    Friend WithEvents txt_coloumn_index As TextBox
     Friend WithEvents TextBox25 As TextBox
     Friend WithEvents cb_cfg_ref_3 As ComboBox
     Friend WithEvents cb_cfg_ref_2 As ComboBox
@@ -4500,4 +4521,23 @@ Partial Class frmMain
     Friend WithEvents TextBox26 As TextBox
     Friend WithEvents txt_main_reference_2 As TextBox
     Friend WithEvents txt_main_reference_3 As TextBox
+    Friend WithEvents GroupBox33 As GroupBox
+    Friend WithEvents GroupBox34 As GroupBox
+    Friend WithEvents ProgressBarExport As ProgressBar
+    Friend WithEvents txt_file_location As TextBox
+    Friend WithEvents btn_export As Button
+    Friend WithEvents btn_select As Button
+    Friend WithEvents btn_search As Button
+    Friend WithEvents use_time_no As CheckBox
+    Friend WithEvents use_time_yes As CheckBox
+    Friend WithEvents use_curr_no As CheckBox
+    Friend WithEvents use_curr_yes As CheckBox
+    Friend WithEvents use_vol_no As CheckBox
+    Friend WithEvents use_vol_yes As CheckBox
+    Friend WithEvents current_mode_dc As CheckBox
+    Friend WithEvents current_mode_ac As CheckBox
+    Friend WithEvents Label58 As Label
+    Friend WithEvents Label59 As Label
+    Friend WithEvents Label60 As Label
+    Friend WithEvents Label61 As Label
 End Class
