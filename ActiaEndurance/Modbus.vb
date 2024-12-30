@@ -9,7 +9,7 @@ Module Modbus
     End Function
     Public Sub OpenPort(IP As String, PORT As String)
         Try
-            modbusClient = New ModbusClient(IP, Val(PORT))
+            modbusClient = New ModbusClient(IP, PORT)
             modbusClient.Connect()
             IsConnected = True
         Catch ex As Exception
