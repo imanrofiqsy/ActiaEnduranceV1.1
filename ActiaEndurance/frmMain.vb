@@ -4,6 +4,8 @@ Imports System.Threading
 Imports System.IO
 Imports System.Text
 Imports System.Timers
+Imports System.Runtime.InteropServices
+Imports System.Windows.Forms.Automation
 
 Public Class frmMain
     Dim ThreadLoadingApp As Thread
@@ -450,13 +452,27 @@ Public Class frmMain
                     'Load Manual Sensor
                     LoadSensorManual()
 
-                    With CurrentVal
+                    With Val
                         .Cur1 = ReadFloat(40000)
                         .Cur2 = ReadFloat(40002)
                         .Cur3 = ReadFloat(40004)
                         .Cur4 = ReadFloat(40006)
                         .Cur5 = ReadFloat(40008)
                         .Cur6 = ReadFloat(40010)
+
+                        .Time1 = ReadInteger(10022)
+                        .Time2 = ReadInteger(10023)
+                        .Time3 = ReadInteger(10024)
+                        .Time4 = ReadInteger(10025)
+                        .Time5 = ReadInteger(10026)
+                        .Time6 = ReadInteger(10027)
+
+                        .result_1 = ReadInteger(10028)
+                        .result_2 = ReadInteger(10029)
+                        .result_3 = ReadInteger(10030)
+                        .result_4 = ReadInteger(10031)
+                        .result_5 = ReadInteger(10032)
+                        .result_6 = ReadInteger(10033)
 
                         Invoke(Sub()
                                    TextBox1.Text = .Cur1
@@ -472,6 +488,13 @@ Public Class frmMain
                                    TextBox16.Text = Logging.CycleCount
                                    TextBox17.Text = Logging.CycleCount
                                    TextBox18.Text = Logging.CycleCount
+
+                                   TextBox19.Text = .Time1
+                                   TextBox20.Text = .Time2
+                                   TextBox21.Text = .Time3
+                                   TextBox22.Text = .Time4
+                                   TextBox23.Text = .Time5
+                                   TextBox24.Text = .Time6
 
                                    txt_main_reference_1.Text = Logging.Reference_1
                                    txt_main_reference_2.Text = Logging.Reference_2
@@ -492,8 +515,14 @@ Public Class frmMain
                             Using writer As New StreamWriter(filePath, append:=True)
                                 ' Iterate through the list and write each row to the file
                                 If EnCavity.Cav1 = "1" Then
+                                    If Val.result_1 = 1 Then
+                                        .FinalResult = "OK"
+                                    Else
+                                        .FinalResult = "NOK"
+                                    End If
+
                                     Dim data_cav As New List(Of String()) From {
-                                        New String() { .No.ToString, .StartDate, .Reference_1, .OpeId, "Cavity 1", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur1, .UseTime, .Time, .FinalResult}
+                                        New String() { .No.ToString, .StartDate, .Reference_1, .OpeId, "Cavity 1", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, Val.Cur1, .UseTime, .Time, .FinalResult}
                                     }
                                     For Each row As String() In data_cav
                                         writer.WriteLine(String.Join(",", row))
@@ -501,8 +530,14 @@ Public Class frmMain
                                 End If
 
                                 If EnCavity.Cav2 = "1" Then
+                                    If Val.result_2 = 1 Then
+                                        .FinalResult = "OK"
+                                    Else
+                                        .FinalResult = "NOK"
+                                    End If
+
                                     Dim data_cav As New List(Of String()) From {
-                                        New String() { .No.ToString, .StartDate, .Reference_1, .OpeId, "Cavity 2", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur2, .UseTime, .Time, .FinalResult}
+                                        New String() { .No.ToString, .StartDate, .Reference_1, .OpeId, "Cavity 2", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, Val.Cur2, .UseTime, .Time, .FinalResult}
                                     }
                                     For Each row As String() In data_cav
                                         writer.WriteLine(String.Join(",", row))
@@ -510,8 +545,14 @@ Public Class frmMain
                                 End If
 
                                 If EnCavity.Cav3 = "1" Then
+                                    If Val.result_3 = 1 Then
+                                        .FinalResult = "OK"
+                                    Else
+                                        .FinalResult = "NOK"
+                                    End If
+
                                     Dim data_cav As New List(Of String()) From {
-                                        New String() { .No.ToString, .StartDate, .Reference_2, .OpeId, "Cavity 3", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur3, .UseTime, .Time, .FinalResult}
+                                        New String() { .No.ToString, .StartDate, .Reference_2, .OpeId, "Cavity 3", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, Val.Cur3, .UseTime, .Time, .FinalResult}
                                     }
                                     For Each row As String() In data_cav
                                         writer.WriteLine(String.Join(",", row))
@@ -519,8 +560,14 @@ Public Class frmMain
                                 End If
 
                                 If EnCavity.Cav4 = "1" Then
+                                    If Val.result_4 = 1 Then
+                                        .FinalResult = "OK"
+                                    Else
+                                        .FinalResult = "NOK"
+                                    End If
+
                                     Dim data_cav As New List(Of String()) From {
-                                        New String() { .No.ToString, .StartDate, .Reference_2, .OpeId, "Cavity 4", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur4, .UseTime, .Time, .FinalResult}
+                                        New String() { .No.ToString, .StartDate, .Reference_2, .OpeId, "Cavity 4", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, Val.Cur4, .UseTime, .Time, .FinalResult}
                                     }
                                     For Each row As String() In data_cav
                                         writer.WriteLine(String.Join(",", row))
@@ -528,8 +575,14 @@ Public Class frmMain
                                 End If
 
                                 If EnCavity.Cav5 = "1" Then
+                                    If Val.result_5 = 1 Then
+                                        .FinalResult = "OK"
+                                    Else
+                                        .FinalResult = "NOK"
+                                    End If
+
                                     Dim data_cav As New List(Of String()) From {
-                                        New String() { .No.ToString, .StartDate, .Reference_3, .OpeId, "Cavity 5", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur5, .UseTime, .Time, .FinalResult}
+                                        New String() { .No.ToString, .StartDate, .Reference_3, .OpeId, "Cavity 5", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, Val.Cur5, .UseTime, .Time, .FinalResult}
                                     }
                                     For Each row As String() In data_cav
                                         writer.WriteLine(String.Join(",", row))
@@ -537,8 +590,14 @@ Public Class frmMain
                                 End If
 
                                 If EnCavity.Cav6 = "1" Then
+                                    If Val.result_6 = 1 Then
+                                        .FinalResult = "OK"
+                                    Else
+                                        .FinalResult = "NOK"
+                                    End If
+
                                     Dim data_cav As New List(Of String()) From {
-                                        New String() { .No.ToString, .StartDate, .Reference_3, .OpeId, "Cavity 6", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, CurrentVal.Cur6, .UseTime, .Time, .FinalResult}
+                                        New String() { .No.ToString, .StartDate, .Reference_3, .OpeId, "Cavity 6", .CycleCount.ToString, .CurrentMode, .UseVoltage, .Voltage, .UseCurrent, Val.Cur6, .UseTime, .Time, .FinalResult}
                                     }
                                     For Each row As String() In data_cav
                                         writer.WriteLine(String.Join(",", row))
@@ -1386,40 +1445,26 @@ Public Class frmMain
         ElseIf use_time_no.Checked = True Then
             searchTime = "Skip Time"
         End If
-        ' The search term from the textbox
-        'columnIndex = txt_coloumn_index.Text.Trim
-        ' Clear existing rows in the DataGridView before adding new ones
+
         DataGridView2.Rows.Clear()
-        ' Reading CSV file content
+        Dim rows As New List(Of String())
+
         While streamReader.Peek() <> -1
             rowvalue = streamReader.ReadLine()
             cellvalue = rowvalue.Split(","c)
-            ' Check if the cell value in the specified column contains the search text
-            If current_mode_ac.Checked = True Or current_mode_dc.Checked = True Then
-                If cellvalue(6).Contains(searchCurrentMode) Then
-                    If use_vol_yes.Checked = True Or use_vol_no.Checked = True Then
-                        If cellvalue(7).Contains(searchVoltage) Then
-                            If use_curr_yes.Checked = True Or use_curr_no.Checked = True Then
-                                If cellvalue(9).Contains(searchCurrent) Then
-                                    If use_time_yes.Checked = True Or use_time_no.Checked = True Then
-                                        DataGridView2.Rows.Add(cellvalue)
-                                    Else
-                                        DataGridView2.Rows.Add(cellvalue)
-                                    End If
-                                End If
-                            Else
-                                DataGridView2.Rows.Add(cellvalue)
-                            End If
-                        End If
-                    Else
-                        DataGridView2.Rows.Add(cellvalue)
-                    End If
-                End If
-            Else
-                DataGridView2.Rows.Add(cellvalue)
+
+            If cellvalue(6).Contains(searchCurrentMode) AndAlso
+                cellvalue(7).Contains(searchVoltage) AndAlso
+                cellvalue(9).Contains(searchCurrent) AndAlso
+                cellvalue(11).Contains(searchTime) Then
+                rows.Add(cellvalue)
             End If
         End While
         streamReader.Close()
+
+        For Each row As String() In rows
+            DataGridView2.Rows.Add(row)
+        Next
     End Sub
 
     Dim _SaveFileDialog As New SaveFileDialog

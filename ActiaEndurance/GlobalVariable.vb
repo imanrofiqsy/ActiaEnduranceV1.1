@@ -4,7 +4,7 @@
     Public UseCavity As Cavity
     Public EnCavity As Cavity
     Public FDUT As Cavity
-    Public CurrentVal As Cavity
+    Public Val As Cavity
     Public Filter As FilterType
     Public Alarm As MachineAlarm
     Public Manual As ManualVar
@@ -101,6 +101,20 @@
         Dim Cur4 As String
         Dim Cur5 As String
         Dim Cur6 As String
+
+        Dim Time1 As String
+        Dim Time2 As String
+        Dim Time3 As String
+        Dim Time4 As String
+        Dim Time5 As String
+        Dim Time6 As String
+
+        Dim result_1 As Integer
+        Dim result_2 As Integer
+        Dim result_3 As Integer
+        Dim result_4 As Integer
+        Dim result_5 As Integer
+        Dim result_6 As Integer
     End Structure
 
     Public Structure FilterType
